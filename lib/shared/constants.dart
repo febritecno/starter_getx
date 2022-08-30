@@ -7,7 +7,6 @@ const IMAGE_PATH = 'assets/images/';
 const ICON_PATH = 'assets/icons/';
 const DEFAULT_IMAGE = '${IMAGE_PATH}Group 7044.png';
 const NO_IMAGE = '${IMAGE_PATH}error-image.png';
-const LOADING_IMAGE = '${ICON_PATH}loading.gif';
 
 abstract class AppConfig {
   static const String defaultFont = 'lato';
