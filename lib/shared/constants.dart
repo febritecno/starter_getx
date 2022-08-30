@@ -10,8 +10,8 @@ const NO_IMAGE = '${IMAGE_PATH}error-image.png';
 const LOADING_IMAGE = '${ICON_PATH}loading.gif';
 
 abstract class AppConfig {
-  static const String defaultFont = 'Mulish';
-  static const double defaultTextSize = 12;
+  static const String defaultFont = 'lato';
+  static const double defaultTextSize = 14;
   static const double defaultTextLineHeight = 1.2;
   static const errorMessage = ['Error', 'Terjadi kesalahan'];
 }
