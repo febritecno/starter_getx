@@ -20,23 +20,4 @@ FontWeight black = FontWeight.w900;
 
 // TextStyle whiteTextStyle = TextStyle(
 //     fontFamily: 'Poppins', color: kWhiteColor, decoration: TextDecoration.none);
-// TextStyle greyTextStyle = TextStyle(
-//     fontFamily: 'Poppins', color: kGreyColor, decoration: TextDecoration.none);
-// TextStyle lightGreyTextStyle =
-//     TextStyle(fontFamily: 'Poppins', color: kLightGreyColor);
-// TextStyle blackTextStyle = TextStyle(fontFamily: 'Poppins', color: kBlackColor);
-// TextStyle blueTextStylee = TextStyle(fontFamily: 'Poppins', color: kBlueColor);
-// TextStyle darkGreyTextStylee =
-//     TextStyle(fontFamily: 'Poppins', color: kDarkGrey);
-// TextStyle blueTextStyle = TextStyle(
-//     fontFamily: 'Poppins', color: kBlueColor, decoration: TextDecoration.none);
-// TextStyle navyTextStyle = TextStyle(
-//     fontFamily: 'Poppins', color: kBlueColor, decoration: TextDecoration.none);
-// TextStyle blueTextBoldStyle = TextStyle(
-//     fontFamily: 'Worksans', color: kBlueColor, fontWeight: FontWeight.bold);
-// TextStyle redTextBoldStyle = TextStyle(
-//     fontFamily: 'Poppins', color: kRedColor, decoration: TextDecoration.none);
-// TextStyle aquaTextStyle = TextStyle(
-//     fontFamily: 'Poppins', color: kAquaColor, decoration: TextDecoration.none);
-// TextStyle freeStyle = TextStyle(fontFamily: 'Poppins');
 
