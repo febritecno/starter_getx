@@ -22,7 +22,9 @@ const Color kLightGreyColor = Color(0xffE3E3E3);
 const String defaultFont = 'lato';
 const double defaultTextSize = 14;
 const double defaultTextLineHeight = 1.2;
+//
 // font weight
+//
 const FontWeight light = FontWeight.w300;
 const FontWeight regular = FontWeight.w400;
 const FontWeight medium = FontWeight.w500;
@@ -30,12 +32,16 @@ const FontWeight semiBold = FontWeight.w600;
 const FontWeight bold = FontWeight.w700;
 const FontWeight extraBold = FontWeight.w800;
 const FontWeight black = FontWeight.w900;
+//
 // font styles
+//
 TextStyle headerTextStyle =
     TextStyle(color: kDarkBlueColor, decoration: TextDecoration.none);
 TextStyle subTextStyle =
     TextStyle(color: kDarkGreyColor, decoration: TextDecoration.none);
+//
 // font text scaling
+//
 const Map<String, double> textScale = {
   'table': 0.65,
   'phone': 0.75,
