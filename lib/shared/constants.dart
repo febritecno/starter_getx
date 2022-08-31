@@ -2,8 +2,6 @@ const APP_NAME = "logistika";
 
 const BASE_URL = "http://ikateksiundip.id/logistika-dev";
 const UPLOAD_PATH = "http://ikateksiundip.id/logistika-dev/uploads";
-// const BASE_URL = "http://ikateksiundip.id/logistika-web";
-// const UPLOAD_PATH = "http://ikateksiundip.id/logistika-web/uploads";
 
 //* VARIABLES
 const IMAGE_PATH = 'assets/images/';
