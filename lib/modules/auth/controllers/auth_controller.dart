@@ -47,10 +47,6 @@ class AuthController extends GetxController {
           final user = jsonEncode(res.data['data']);
           AuthPrefs.setToken(bearer);
           AuthPrefs.setUser(user);
-          // var load = AuthPrefs.getToken();
-          // print("token1 " + load!);
-          // var loadUser = jsonDecode(AuthPrefs.getUser()!);
-          // print("photo " + loadUser['photo']);
           Get.offAllNamed(Routes.DASHBOARD);
         } else if (res.statusCode == 400) {
           isLoading(false);

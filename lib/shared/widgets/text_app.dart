@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:logistika/shared/constants.dart';
 import 'package:get/get.dart';
+
+import '../theme.dart';
 
 class TextApp extends StatelessWidget {
   final String text;
@@ -50,19 +51,19 @@ class TextApp extends StatelessWidget {
         softWrap: softWrap,
         textDirection: textDirection,
         textScaleFactor: context.isTablet
-            ? 0.65
+            ? textScale['tablet']
             : context.isPhone
-                ? 0.75
+                ? textScale['phone']
                 : context.isLargeTablet
-                    ? 0.60
-                    : 0.70,
+                    ? textScale['largeTablet']
+                    : textScale['dafault'],
         style: style ??
             TextStyle(
               decoration: textDecoration ?? TextDecoration.none,
-              height: height ?? AppConfig.defaultTextLineHeight,
+              height: height ?? defaultTextLineHeight,
               fontWeight: fontWeight ?? FontWeight.normal,
-              fontSize: fontSize ?? AppConfig.defaultTextSize,
-              fontFamily: fontFamily ?? AppConfig.defaultFont,
+              fontSize: fontSize ?? defaultTextSize,
+              fontFamily: fontFamily ?? defaultFont,
               color: color ?? Colors.black,
               fontStyle: fontStyle ?? FontStyle.normal,
             ),
