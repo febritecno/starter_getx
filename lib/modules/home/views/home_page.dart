@@ -8,7 +8,7 @@ import '../controllers/home_controller.dart';
 class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
 
-  _header() {
+  _header(data) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 6.w),
       child: Column(
@@ -19,7 +19,9 @@ class HomePage extends GetView<HomeController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.menu, color: Colors.white),
+                GestureDetector(
+                    child: Icon(Icons.menu, color: Colors.white),
+                    onTap: () => data['key'].currentState!.openDrawer()),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -121,15 +123,77 @@ class HomePage extends GetView<HomeController> {
     return Column();
   }
 
+  Widget _drawer() {
+    return SizedBox(
+      //membuat menu drawer
+      child: Drawer(
+        //membuat list,
+        //list digunakan untuk melakukan scrolling jika datanya terlalu panjang
+        child: ListView(
+          padding: EdgeInsets.zero,
+          //di dalam listview ini terdapat beberapa widget drawable
+          children: [
+            UserAccountsDrawerHeader(
+              //membuat gambar profil
+              currentAccountPicture: Image(
+                  image: NetworkImage(
+                      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")),
+              //membuat nama akun
+              accountName: Text("Sahretech"),
+              //membuat nama email
+              accountEmail: Text("ig: @sahretech"),
+              //memberikan background
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          "https://cdn.pixabay.com/photo/2016/04/24/20/52/laundry-1350593_960_720.jpg"),
+                      fit: BoxFit.cover)),
+            ),
+            //membuat list menu
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("Beranda"),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.people),
+              title: Text("Pegawai"),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.money),
+              title: Text("Transaksi"),
+              onTap: () {},
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.emoji_emotions),
+              title: Text("Profil"),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text("Tentang"),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
+
     return Scaffold(
+      key: _key,
       body: Column(
         children: [
           Stack(
             children: [
               Container(color: kDarkBlueColor, height: 50.h),
-              _header()
+              _header({'key': _key})
             ],
           ),
           Container(
@@ -138,6 +202,7 @@ class HomePage extends GetView<HomeController> {
           ),
         ],
       ),
+      drawer: _drawer(),
     );
   }
 }
