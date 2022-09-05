@@ -137,8 +137,10 @@ class CircleLoading extends StatelessWidget {
     return SizedBox(
       child: Center(
           child: progressIndicator ??
-              LoadingAnimationWidget.fourRotatingDots(
-                  color: kBlueColor, size: width * 16 / 100)),
+              LoadingAnimationWidget.twistingDots(
+                  leftDotColor: kDarkBlueColor,
+                  rightDotColor: kBlueColor,
+                  size: width * 16 / 100)),
       width: width,
       height: sizeHeight,
     );

@@ -1,11 +1,10 @@
 import 'package:logistika/helpers/helpers.dart';
 import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/shared/theme.dart';
 import 'package:logistika/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class CustomTextField extends StatelessWidget {
+class TextFieldApp extends StatelessWidget {
   final Function(String)? onChanged;
   final TextStyle? placeholderStyle;
   final Color? color;
@@ -29,7 +28,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
 
-  const CustomTextField(
+  const TextFieldApp(
       {Key? key,
       this.label,
       this.suffix,

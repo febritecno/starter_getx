@@ -12,7 +12,7 @@ class PdfViewTemplate extends StatefulWidget {
 
   const PdfViewTemplate(
       {Key? key,
-      this.title: "logistika Reader",
+      this.title: "Reader",
       this.url: "http://www.africau.edu/images/default/sample.pdf"})
       : super(key: key);
 

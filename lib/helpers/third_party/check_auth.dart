@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/services.dart';
 import 'package:logistika/helpers/third_party/sizer/sizer.dart';
 import 'package:logistika/shared/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:logistika/shared/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CheckAuthScreen extends StatefulWidget {
@@ -41,14 +43,25 @@ class _CheckAuthScreenState extends State<CheckAuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset(ICON_PATH + "splash_logo.png", width: 35.w),
-        ],
+    return SafeArea(
+      child: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          stops: [0, 1],
+          colors: [
+            Colors.white,
+            Color(0xff2575AB),
+          ],
+        )),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(ICON_PATH + "splash_logo.png", width: 60.w),
+          ],
+        ),
       ),
     );
   }
