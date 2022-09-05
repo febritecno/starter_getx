@@ -147,64 +147,142 @@ class HomePage extends GetView<HomeController> {
     return Column();
   }
 
-  Widget _drawer() {
+  Widget _drawer(data) {
     return Drawer(
+      backgroundColor: kSemiBlueColor,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          UserAccountsDrawerHeader(
-            currentAccountPicture: Image(
-                image: NetworkImage(
-                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")),
-            accountName: Text("Sahretech"),
-            accountEmail: Text("ig: @sahretech"),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(
-                        "https://cdn.pixabay.com/photo/2016/04/24/20/52/laundry-1350593_960_720.jpg"),
-                    fit: BoxFit.cover)),
+          Container(
+            height: 30.h,
+            color: kBlackBlueColor,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () => data['key'].currentState!.closeDrawer(),
+                  child: Container(
+                    padding: EdgeInsets.all(10.sp),
+                    alignment: Alignment.centerLeft,
+                    child: Icon(Icons.arrow_back_ios_rounded,
+                        color: Colors.white, size: 16.sp),
+                  ),
+                ),
+                Column(
+                  children: [
+                    Icon(Icons.account_circle_rounded,
+                        color: Colors.white, size: 60.sp),
+                    TextApp("Olivia Puspita",
+                        fontWeight: extraBold,
+                        color: Colors.white,
+                        height: 2,
+                        fontSize: 16.sp),
+                    TextApp(
+                      "Admin",
+                      color: Colors.white,
+                      fontSize: 14.sp,
+                      height: 1.4,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           ListTile(
-            leading: Icon(Icons.manage_accounts_sharp),
-            title: Text("My Account"),
+            leading: Icon(Icons.manage_accounts_sharp,
+                color: Colors.white, size: 18.sp),
+            title: TextApp(
+              "My Account",
+              fontSize: 14.sp,
+              fontWeight: bold,
+              color: Colors.white,
+            ),
             onTap: () {
               Get.back();
             },
           ),
+          Divider(color: kLightBlueColor, height: 0, thickness: 1),
           ListTile(
-            leading: Icon(Icons.switch_account_sharp),
-            title: Text("Booking"),
+            leading: Icon(Icons.switch_account_sharp,
+                color: Colors.white, size: 18.sp),
+            title: TextApp(
+              "Booking",
+              fontSize: 14.sp,
+              fontWeight: bold,
+              color: Colors.white,
+            ),
             onTap: () {},
           ),
+          Divider(color: kLightBlueColor, height: 0, thickness: 1),
           ListTile(
-            leading: Icon(Icons.screenshot_monitor_outlined),
-            title: Text("Operational Monitoring"),
+            leading: Icon(Icons.screenshot_monitor_outlined,
+                color: Colors.white, size: 18.sp),
+            title: TextApp(
+              "Operational Monitoring",
+              fontSize: 14.sp,
+              fontWeight: bold,
+              color: Colors.white,
+            ),
             onTap: () {},
           ),
+          Divider(color: kLightBlueColor, height: 0, thickness: 1),
           ListTile(
-            leading: Icon(Icons.query_stats_outlined),
-            title: Text("Tarif Info"),
+            leading: Icon(Icons.query_stats_outlined,
+                color: Colors.white, size: 18.sp),
+            title: TextApp(
+              "Tarif Info",
+              fontSize: 14.sp,
+              fontWeight: bold,
+              color: Colors.white,
+            ),
             onTap: () {},
           ),
+          Divider(color: kLightBlueColor, height: 0, thickness: 1),
           ListTile(
-            leading: Icon(Icons.currency_exchange),
-            title: Text("Invoice"),
+            leading:
+                Icon(Icons.currency_exchange, color: Colors.white, size: 18.sp),
+            title: TextApp(
+              "Invoice",
+              fontSize: 14.sp,
+              fontWeight: bold,
+              color: Colors.white,
+            ),
             onTap: () {},
           ),
+          Divider(color: kLightBlueColor, height: 0, thickness: 1),
           ListTile(
-            leading: Icon(Icons.file_present_rounded),
-            title: Text("List Hold Amount"),
+            leading: Icon(Icons.file_present_rounded,
+                color: Colors.white, size: 18.sp),
+            title: TextApp(
+              "List Hold Amount",
+              fontSize: 14.sp,
+              fontWeight: bold,
+              color: Colors.white,
+            ),
             onTap: () {},
           ),
+          Divider(color: kLightBlueColor, height: 0, thickness: 1),
           ListTile(
-            leading: Icon(Icons.document_scanner),
-            title: Text("List Proforma (DP)"),
+            leading:
+                Icon(Icons.document_scanner, color: Colors.white, size: 18.sp),
+            title: TextApp(
+              "List Proforma (DP)",
+              fontSize: 14.sp,
+              fontWeight: bold,
+              color: Colors.white,
+            ),
             onTap: () {},
           ),
-          Divider(),
+          Divider(color: kLightBlueColor, height: 0, thickness: 1),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text("Logout"),
+            leading: Icon(Icons.exit_to_app, color: Colors.white, size: 18.sp),
+            title: TextApp(
+              "Logout",
+              fontSize: 14.sp,
+              fontWeight: bold,
+              color: Colors.white,
+            ),
             onTap: () {},
           ),
         ],
@@ -232,7 +310,7 @@ class HomePage extends GetView<HomeController> {
           ),
         ],
       ),
-      drawer: _drawer(),
+      drawer: _drawer({'key': _key}),
     );
   }
 }
