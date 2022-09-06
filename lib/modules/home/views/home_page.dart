@@ -294,19 +294,22 @@ class HomePage extends GetView<HomeController> {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: defaultMargin.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                TextApp(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: defaultMargin.w),
+                child: TextApp(
                   "Ship Sales",
                   fontSize: 18.sp,
                   fontWeight: bold,
                   padding: EdgeInsets.only(top: 2.h, bottom: 1.h),
                 ),
-                SingleChildScrollView(
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: defaultMargin.w),
+                child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: List.generate(
@@ -350,9 +353,9 @@ class HomePage extends GetView<HomeController> {
                               ),
                             )),
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           )
         ],
       ),
