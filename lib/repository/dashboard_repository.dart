@@ -8,6 +8,20 @@ class DashboardRepository extends IDashboardRepository {
   final ApiClient apiClient;
   DashboardRepository({required this.apiClient});
 
+  @override
+  Future getTest(query) async {
+    try {
+      final response = await apiClient
+          .get("$BASE_URL/API/donasi/index.php?action=list_donasi", query: {
+        'limit': query['limit'] ?? '1',
+        'page': query['page'] ?? '0'
+      });
+      return response;
+    } catch (error, stacktrace) {
+      throw ServerException(error.toString(), stacktrace);
+    }
+  }
+
   // SUMBANGAN
   //
   @override

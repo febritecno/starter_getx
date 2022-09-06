@@ -17,6 +17,7 @@ const Color kGreenColor = Color(0xff35A632);
 const Color kDarkGreyColor = Color(0xff858585);
 const Color kGreyColor = Color(0xffDADADA);
 const Color kLightGreyColor = Color(0xffE3E3E3);
+const Color kdarkGreyColor = Color(0xff4F4F4F);
 
 //* FONT STYLES
 const String defaultFont = 'lato';

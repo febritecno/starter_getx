@@ -6,4 +6,9 @@ class HomeController extends GetxController {
   HomeController({required this.repository});
 
   var isLoading = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
 }
