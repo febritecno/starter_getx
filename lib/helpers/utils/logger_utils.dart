@@ -1,5 +1,11 @@
 import 'dart:math';
 
+class L {
+  static og(data, {x = ''}) {
+    return print("$data => L.og$x");
+  }
+}
+
 class Log {
   // Sample of abstract logging function
   static void info(String text, {bool isError = false}) {

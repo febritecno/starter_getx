@@ -1,4 +1,4 @@
-import 'package:logistika/helpers/utils/prefs_utils.dart';
+import 'package:absen/helpers/utils/prefs_utils.dart';
 
 class AuthPrefs {
   //remove key
@@ -12,9 +12,4 @@ class AuthPrefs {
   static bool isTokenNull() =>
       (Prefs.getString('token_key') == null) ? true : false;
   static Future<bool> resetToken() => Prefs.setString('token_key', 'null');
-
-  // user_key value
-  static String? getUser() => Prefs.getString('user_key');
-  static Future<bool> setUser(String value) =>
-      Prefs.setString('user_key', value);
 }

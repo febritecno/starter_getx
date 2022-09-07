@@ -1,4 +1,4 @@
-import 'package:logistika/shared/constants.dart';
+import 'package:absen/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class PreviewTemplate extends StatelessWidget {
@@ -16,7 +16,7 @@ class PreviewTemplate extends StatelessWidget {
           image: NetworkImage(image!),
           placeholder: AssetImage(NO_IMAGE),
           imageErrorBuilder: (context, error, stackTrace) =>
-              Image.asset(DEFAULT_IMAGE),
+              Image.asset(NO_IMAGE),
         ),
       ),
     );

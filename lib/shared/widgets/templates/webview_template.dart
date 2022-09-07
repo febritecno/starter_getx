@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'package:logistika/shared/widgets/loading_app.dart';
-import 'package:logistika/shared/widgets/templates/appbar_template.dart';
+import 'package:absen/shared/widgets/loading_app.dart';
+import 'package:absen/shared/widgets/templates/appbar_template.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -32,7 +32,6 @@ class WebViewTemplateState extends State<WebViewTemplate> {
       isLoading: isLoading,
       child: AppbarTemplate(
         title: widget.title!,
-        isCustom: true,
         body: WebView(
           initialUrl: widget.url,
           javascriptMode: JavascriptMode.unrestricted,

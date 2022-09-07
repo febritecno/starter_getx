@@ -1,6 +1,6 @@
-import 'package:logistika/helpers/helpers.dart';
-import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/shared/widgets/text_app.dart';
+import 'package:absen/helpers/helpers.dart';
+import 'package:absen/helpers/third_party/sizer/sizer.dart';
+import 'package:absen/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

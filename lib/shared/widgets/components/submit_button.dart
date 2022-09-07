@@ -1,6 +1,6 @@
-import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/shared/theme.dart';
-import 'package:logistika/shared/widgets/text_app.dart';
+import 'package:absen/helpers/third_party/sizer/sizer.dart';
+import 'package:absen/shared/theme.dart';
+import 'package:absen/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 
 class SubmitButton extends StatelessWidget {

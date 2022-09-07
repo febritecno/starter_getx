@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/shared/constants.dart';
-import 'package:logistika/shared/theme.dart';
-import 'package:logistika/shared/widgets/text_app.dart';
+import 'package:absen/helpers/third_party/sizer/sizer.dart';
+import 'package:absen/shared/constants.dart';
+import 'package:absen/shared/theme.dart';
+import 'package:absen/shared/widgets/text_app.dart';
 import '../controllers/home_controller.dart';
 
 class HomePage extends GetView<HomeController> {

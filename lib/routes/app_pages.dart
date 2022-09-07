@@ -1,8 +1,8 @@
-import 'package:logistika/helpers/third_party/check_auth.dart';
-import 'package:logistika/modules/auth/views/login_page.dart';
-import 'package:logistika/modules/home/views/dashboard_page.dart';
+import 'package:absen/helpers/third_party/check_auth.dart';
+import 'package:absen/modules/auth/views/login_page.dart';
+import 'package:absen/modules/home/views/dashboard_page.dart';
 import 'package:get/get.dart';
-import 'package:logistika/routes/routes.dart';
+import 'package:absen/routes/routes.dart';
 
 import 'app_bindings.dart';
 
@@ -17,10 +17,8 @@ class AppPages {
         name: INITIAL,
         page: () {
           return CheckAuthScreen(
-            loginScreen: GetPageRoute(
-                routeName: Routes.LOGIN,
-                page: () => LoginPage(),
-                binding: AuthBinding()),
+            loginScreen:
+                GetPageRoute(routeName: Routes.LOGIN, page: () => LoginPage()),
             landingScreen: GetPageRoute(
               routeName: Routes.DASHBOARD,
               page: () => DashboardPage(),

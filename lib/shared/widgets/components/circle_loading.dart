@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:logistika/shared/theme.dart';
+import 'package:absen/shared/theme.dart';
 
 class CircleLoading extends StatelessWidget {
   final double sizeHeight, strokeWidth;

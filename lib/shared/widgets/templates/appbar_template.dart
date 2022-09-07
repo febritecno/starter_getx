@@ -1,6 +1,6 @@
-import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/shared/theme.dart';
-import 'package:logistika/shared/widgets/text_app.dart';
+import 'package:absen/helpers/third_party/sizer/sizer.dart';
+import 'package:absen/shared/theme.dart';
+import 'package:absen/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,7 +11,6 @@ class AppbarTemplate extends StatelessWidget {
       this.weight,
       required this.title,
       this.isCenter: true,
-      this.isCustom: false,
       this.body,
       this.onBack})
       : super(key: key);
@@ -20,14 +19,13 @@ class AppbarTemplate extends StatelessWidget {
   final String title;
   final double? weight;
   final bool? isCenter;
-  final bool? isCustom;
   final Widget? body;
   final VoidCallback? onBack;
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () async => onBack == null ? true : false,
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
@@ -48,7 +46,7 @@ class AppbarTemplate extends StatelessWidget {
             ),
             backgroundColor: Colors.white,
           ),
-          body: isCustom == false
+          body: children != null
               ? Container(
                   color: Colors.white,
                   height: double.infinity,

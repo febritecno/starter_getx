@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:logistika/shared/widgets/templates/appbar_template.dart';
+import 'package:absen/shared/widgets/templates/appbar_template.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -66,7 +66,6 @@ class _PdfViewTemplateState extends State<PdfViewTemplate> {
   Widget build(BuildContext context) {
     return AppbarTemplate(
       title: widget.title!,
-      isCustom: true,
       body: Stack(
         children: [
           remotePDFpath != ''

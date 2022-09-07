@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:logistika/routes/routes.dart';
-import 'package:logistika/services/app_services.dart';
-import 'package:logistika/shared/constants.dart';
+import 'package:absen/routes/routes.dart';
+import 'package:absen/services/app_services.dart';
+import 'package:absen/shared/constants.dart';
 
 import 'helpers/third_party/sizer/sizer.dart';
 import 'routes/app_pages.dart';

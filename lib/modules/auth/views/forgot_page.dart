@@ -1,10 +1,10 @@
-// import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-// import 'package:logistika/modules/auth/controllers/auth_controller.dart';
-// import 'package:logistika/shared/theme.dart';
-// import 'package:logistika/shared/widgets/components/ripple_button.dart';
-// import 'package:logistika/shared/widgets/loading_app.dart';
-// import 'package:logistika/shared/widgets/templates/auth_template.dart';
-// import 'package:logistika/shared/widgets/text_app.dart';
+// import 'package:absen/helpers/third_party/sizer/sizer.dart';
+// import 'package:absen/modules/auth/controllers/auth_controller.dart';
+// import 'package:absen/shared/theme.dart';
+// import 'package:absen/shared/widgets/components/ripple_button.dart';
+// import 'package:absen/shared/widgets/loading_app.dart';
+// import 'package:absen/shared/widgets/templates/auth_template.dart';
+// import 'package:absen/shared/widgets/text_app.dart';
 // import 'package:flutter/material.dart';
 // import 'package:form_field_validator/form_field_validator.dart';
 // import 'package:get/get.dart';

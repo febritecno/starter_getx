@@ -1,8 +1,7 @@
-import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/shared/constants.dart';
-import 'package:logistika/shared/theme.dart';
-import 'package:logistika/shared/widgets/components/img_network.dart';
-import 'package:logistika/shared/widgets/text_app.dart';
+import 'package:absen/helpers/third_party/sizer/sizer.dart';
+import 'package:absen/shared/theme.dart';
+import 'package:absen/shared/widgets/components/img_network.dart';
+import 'package:absen/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -103,7 +102,6 @@ class AlertItem extends StatelessWidget {
     return AlertDialog(
       content: ConstrainedBox(
         constraints: BoxConstraints(
-          //* atur maxHeight buat batasin ukuran dialog 100.h = 100% full screen di layar
           maxHeight: 80.h,
         ),
         child: Container(
@@ -135,7 +133,6 @@ class AlertItem extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                           fontSize: 14.sp,
                           textAlign: TextAlign.center,
-                          // *atur maxLines buat batasin max baris yang ditampilkan
                           maxLines: 18,
                           softWrap: true,
                           overflow: TextOverflow.clip,
@@ -181,7 +178,6 @@ class AlertItem extends StatelessWidget {
                                   fontWeight: FontWeight.w700,
                                 ),
                               )),
-                          // *atur jarak kedua tombol agar engga gancet ketika text cuma sebiji
                           SizedBox(width: 3.w),
                           ElevatedButton(
                             style: ButtonStyle(

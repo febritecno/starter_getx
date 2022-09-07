@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:logistika/shared/constants.dart';
+import 'package:absen/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class ImgNetwork extends StatelessWidget {

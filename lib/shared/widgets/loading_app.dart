@@ -1,6 +1,6 @@
-import 'package:logistika/shared/theme.dart';
+import 'package:absen/shared/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:logistika/helpers/helpers.dart';
+import 'package:absen/helpers/helpers.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoadingApp extends StatefulWidget {

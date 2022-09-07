@@ -1,4 +1,4 @@
-import 'package:logistika/shared/widgets/text_app.dart';
+import 'package:absen/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 
 class RoundedButton extends StatelessWidget {
