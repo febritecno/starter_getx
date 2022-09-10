@@ -1,7 +1,6 @@
 import 'package:absen/shared/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:absen/helpers/helpers.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoadingApp extends StatefulWidget {
   final bool isLoading;
@@ -137,11 +136,10 @@ class CircleLoading extends StatelessWidget {
     return SizedBox(
       child: Center(
           child: progressIndicator ??
-              LoadingAnimationWidget.twistingDots(
-                  leftDotColor: kDarkBlueColor,
-                  rightDotColor: kBlueColor,
-                  size: width * 16 / 100)),
-      width: width,
+              CircularProgressIndicator(
+                color: Colors.black,
+              )),
+      width: width * 16 / 100,
       height: sizeHeight,
     );
   }

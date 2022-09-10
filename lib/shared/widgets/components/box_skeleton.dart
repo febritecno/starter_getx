@@ -1,7 +1,7 @@
 import 'package:absen/helpers/third_party/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:absen/helpers/third_party/sizer/sizer.dart';
+import 'package:sizer/sizer.dart';
 
 class BoxSkeleton extends StatelessWidget {
   final double? height;

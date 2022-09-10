@@ -1,9 +1,8 @@
 import 'dart:async';
-
-import 'package:absen/helpers/third_party/sizer/sizer.dart';
 import 'package:absen/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sizer/sizer.dart';
 
 class CheckAuthScreen extends StatefulWidget {
   final PageRoute loginScreen;

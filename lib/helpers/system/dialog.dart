@@ -1,9 +1,8 @@
-import 'package:absen/helpers/third_party/sizer/sizer.dart';
 import 'package:absen/shared/theme.dart';
-import 'package:absen/shared/widgets/components/img_network.dart';
 import 'package:absen/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class AppDialog {
   static void load(Widget child,
@@ -34,52 +33,8 @@ class AppDialog {
               title: title);
         });
   }
-
-  static Future<dynamic> previewImage({image}) {
-    return showDialog(
-        context: Get.context!,
-        builder: (BuildContext context) {
-          return PreviewItem(
-            image: image,
-          );
-        });
-  }
 }
 
-class PreviewItem extends StatelessWidget {
-  final String? image;
-
-  const PreviewItem({
-    Key? key,
-    this.image,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onDoubleTap: () => Get.back(),
-      child: Container(
-        color: Colors.black.withOpacity(0.8),
-        child: InteractiveViewer(
-          panEnabled: false,
-          boundaryMargin: EdgeInsets.all(100),
-          minScale: 0.5,
-          maxScale: 2,
-          child: AlertDialog(
-              contentPadding: EdgeInsets.zero,
-              titlePadding: EdgeInsets.zero,
-              buttonPadding: EdgeInsets.zero,
-              actionsPadding: EdgeInsets.zero,
-              insetPadding: EdgeInsets.zero,
-              backgroundColor: Colors.transparent,
-              content: ImgNetwork(image!)),
-        ),
-      ),
-    );
-  }
-}
-
-//* AUTOSIZE CONTAINER DIALOG
 class AlertItem extends StatelessWidget {
   final String? title, desc, btnLeft, btnRight;
   final Widget? body, footer;

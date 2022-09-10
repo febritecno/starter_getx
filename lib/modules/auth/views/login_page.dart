@@ -1,4 +1,3 @@
-import 'package:absen/helpers/third_party/sizer/sizer.dart';
 import 'package:absen/modules/auth/controllers/auth_controller.dart';
 import 'package:absen/shared/widgets/loading_app.dart';
 import 'package:absen/shared/theme.dart';
