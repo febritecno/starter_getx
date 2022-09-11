@@ -16,11 +16,11 @@ class CheckAuthScreen extends StatefulWidget {
 class _CheckAuthScreenState extends State<CheckAuthScreen> {
   Future _checkFirstSeen() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    String? tokenKey = _prefs.getString('token_key');
+    String? tokenKey = _prefs.getString('master_location');
 
     try {
       if (tokenKey.toString() == "null") {
-        _prefs.setString('token_key', 'null');
+        _prefs.setString('master_location', 'null');
         Navigator.of(context).pushReplacement(widget.loginScreen);
       } else {
         Navigator.of(context).pushReplacement(widget.landingScreen);
@@ -42,21 +42,12 @@ class _CheckAuthScreenState extends State<CheckAuthScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0, 1],
-          colors: [
-            Colors.white,
-            Color(0xff2575AB),
-          ],
-        )),
+        color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(ICON_PATH + "splash_logo.png", width: 60.w),
+            Image.asset(ICON_PATH + "splash_icon.png", width: 60.w),
           ],
         ),
       ),

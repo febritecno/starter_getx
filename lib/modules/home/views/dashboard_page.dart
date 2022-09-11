@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:absen/helpers/third_party/animation_indexed.dart';
 import 'package:absen/modules/home/controllers/dashboard_controller.dart';
-import 'package:absen/modules/home/views/home_page.dart';
 import 'package:absen/shared/theme.dart';
+
+import 'attendance_page.dart';
+import 'home_page.dart';
 
 class DashboardPage extends GetView<DashboardController> {
   const DashboardPage({Key? key}) : super(key: key);
@@ -19,6 +21,7 @@ class DashboardPage extends GetView<DashboardController> {
                       index: controller.tabIndex,
                       children: [
                         HomePage(),
+                        AttendancePage(),
                       ]),
                 ),
                 bottomNavigationBar: Container(
@@ -33,36 +36,33 @@ class DashboardPage extends GetView<DashboardController> {
                           blurRadius: 2),
                     ],
                   ),
-                  child: Visibility(
-                    visible: false,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0),
-                      ),
-                      child: BottomNavigationBar(
-                        type: BottomNavigationBarType.fixed,
-                        showUnselectedLabels: true,
-                        currentIndex: controller.tabIndex,
-                        selectedItemColor: kBlueColor,
-                        unselectedItemColor: Colors.black87,
-                        selectedFontSize: 12,
-                        selectedLabelStyle: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w600),
-                        unselectedLabelStyle: TextStyle(fontSize: 12),
-                        unselectedFontSize: 12,
-                        onTap: controller.changeTabIndex,
-                        items: [
-                          BottomNavigationBarItem(
-                            icon: Icon(Icons.abc_rounded),
-                            label: 'Home',
-                          ),
-                          BottomNavigationBarItem(
-                            icon: Icon(Icons.abc_rounded),
-                            label: 'Settings',
-                          ),
-                        ],
-                      ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      topRight: Radius.circular(20.0),
+                    ),
+                    child: BottomNavigationBar(
+                      type: BottomNavigationBarType.fixed,
+                      showUnselectedLabels: true,
+                      currentIndex: controller.tabIndex,
+                      selectedItemColor: kBlueColor,
+                      unselectedItemColor: Colors.black87,
+                      selectedFontSize: 12,
+                      selectedLabelStyle:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                      unselectedLabelStyle: TextStyle(fontSize: 12),
+                      unselectedFontSize: 12,
+                      onTap: controller.changeTabIndex,
+                      items: [
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.timelapse_sharp),
+                          label: 'Home',
+                        ),
+                        BottomNavigationBarItem(
+                          icon: Icon(Icons.lock_clock),
+                          label: 'Attendances',
+                        ),
+                      ],
                     ),
                   ),
                 ),

@@ -25,9 +25,9 @@ class AppSnackBar {
     );
   }
 
-  static void success(String message, {seconds}) {
+  static void success(String message, {seconds, String? title}) {
     Get.snackbar(
-      "Success",
+      title ?? "Success",
       message,
       icon: Icon(Icons.check_circle_outline_rounded, color: Colors.white),
       colorText: Colors.white,
@@ -46,10 +46,10 @@ class AppSnackBar {
       "Info",
       message,
       colorText: Colors.white,
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.orange,
       forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
       reverseAnimationCurve: Curves.linear,
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
       shouldIconPulse: true,
       isDismissible: true,
       duration: Duration(seconds: 3),
@@ -68,7 +68,7 @@ class AppSnackBar {
       shouldIconPulse: true,
       margin: EdgeInsets.only(bottom: 5, left: 20, right: 20),
       isDismissible: true,
-      duration: Duration(seconds: 3),
+      duration: Duration(seconds: 6),
     );
   }
 }

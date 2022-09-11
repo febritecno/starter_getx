@@ -1,3 +1,4 @@
+import 'package:absen/modules/home/controllers/attendance_controller.dart';
 import 'package:get/get.dart';
 
 import 'home_controller.dart';
@@ -8,21 +9,13 @@ class DashboardController extends GetxController {
   void changeTabIndex(int index) {
     tabIndex = index;
     print("menu ke $tabIndex");
-    if (tabIndex != 0) {
-      switch (tabIndex) {
-        case 1:
-          // Get.find<GroupController>().onInit();
-          break;
-        case 2:
-          // Get.find<ReferensiController>().onInit();
-          break;
-        case 3:
-          // Get.find<ProfileController>().onInit();
-          break;
-        default:
-      }
-    } else {
-      Get.find<HomeController>();
+    switch (tabIndex) {
+      case 0:
+        Get.find<HomeController>().onInit();
+        break;
+      case 1:
+        Get.find<AttendanceController>().onInit();
+        break;
     }
     update();
   }

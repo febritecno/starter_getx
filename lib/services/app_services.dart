@@ -1,3 +1,4 @@
+import 'package:absen/helpers/helpers.dart';
 import 'package:absen/helpers/utils/prefs_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 /// So remember, if you need absolute persistence of a class instance during the lifetime of your app, use GetxService.
 void initServices() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Helpers.determinePosition();
   await Get.putAsync(() => PrefsService().init());
 }
 

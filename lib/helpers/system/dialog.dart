@@ -35,6 +35,7 @@ class AppDialog {
   }
 }
 
+//* Alert Widget
 class AlertItem extends StatelessWidget {
   final String? title, desc, btnLeft, btnRight;
   final Widget? body, footer;
@@ -177,4 +178,3 @@ class AlertItem extends StatelessWidget {
     );
   }
 }
-//*

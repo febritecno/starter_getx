@@ -1,15 +1,16 @@
 import 'package:absen/helpers/utils/prefs_utils.dart';
 
-class AuthPrefs {
-  //remove key
-  static Future<dynamic> clearAll() => Prefs.clear();
-  static Future<dynamic> removeKey(String key) => Prefs.remove(key);
+class AppKey {
+  // master location
+  static String? getTargetLocation() => Prefs.getString('master_location');
+  static Future<bool> setTargetLocation(String value) =>
+      Prefs.setString('master_location', value);
+  static Future<bool> resetTargetLocation() =>
+      Prefs.setString('master_location', 'null');
 
-  // token_key value
-  static String? getToken() => Prefs.getString('token_key');
-  static Future<bool> setToken(String value) =>
-      Prefs.setString('token_key', value);
-  static bool isTokenNull() =>
-      (Prefs.getString('token_key') == null) ? true : false;
-  static Future<bool> resetToken() => Prefs.setString('token_key', 'null');
+  // master attendance
+  static List<String>? getListAttendance() =>
+      Prefs.getStringList('master_attendance');
+  static Future<bool> setListAttendance(List<String> value) =>
+      Prefs.setStringList('master_attendance', value);
 }
