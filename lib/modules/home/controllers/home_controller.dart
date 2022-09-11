@@ -43,7 +43,7 @@ class HomeController extends GetxController {
     try {
       await getTimeNow();
       await distanceInMeter();
-      if ((masterAttendance['meter'] as int) > 500000) {
+      if ((masterAttendance['meter'] as int) > 50) {
         AppSnackBar.error(
             "Kehadiran ditolak, anda tidak dalam jangkauan 50 meter dari target lokasi",
             title: "Rejected!");

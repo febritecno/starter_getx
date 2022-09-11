@@ -38,8 +38,7 @@ class HomePage extends GetView<HomeController> {
                                   BoxShadow(
                                     color: Colors.black26,
                                     blurRadius: 30,
-                                    offset: Offset(
-                                        0, 10), // changes position of shadow
+                                    offset: Offset(0, 10),
                                   ),
                                 ],
                                 borderRadius:
@@ -94,16 +93,21 @@ class HomePage extends GetView<HomeController> {
                                   fontSize: 18.sp,
                                   fontWeight: bold,
                                   borderCircular: 18,
-                                  onTap: () => AppDialog.showAlert(
-                                    btnLeft: "Tidak",
-                                    btnRight: "Iya",
-                                    desc: "tidak bisa diubah setelah tersimpan",
-                                    onBtnRight: () {
-                                      Get.back();
-                                      controller.submitAttendance();
-                                    },
-                                    title: "Apakah anda yakin ?",
-                                  ),
+                                  onTap: () {
+                                    if (!Get.isSnackbarOpen) {
+                                      AppDialog.showAlert(
+                                        btnLeft: "Tidak",
+                                        btnRight: "Iya",
+                                        desc:
+                                            "tidak bisa diubah setelah tersimpan",
+                                        onBtnRight: () {
+                                          Get.back();
+                                          controller.submitAttendance();
+                                        },
+                                        title: "Apakah anda yakin ?",
+                                      );
+                                    }
+                                  },
                                   fontColor: Colors.white,
                                   color: kOrangeColor,
                                   linearGradient: LinearGradient(
