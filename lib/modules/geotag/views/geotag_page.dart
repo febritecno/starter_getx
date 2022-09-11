@@ -33,8 +33,8 @@ class GeotagPage extends GetView<GeotagController> {
                   children: [
                     TileLayer(
                       urlTemplate:
-                          'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                      userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+                          'https://mt.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+                      userAgentPackageName: 'com.example.absen',
                     ),
                     MarkerLayer(
                       markers: [
