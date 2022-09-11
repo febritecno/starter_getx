@@ -58,6 +58,7 @@ class GeotagPage extends GetView<GeotagController> {
                   children: [
                     Container(
                       height: 12.h,
+                      alignment: Alignment.center,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.black45,
@@ -66,23 +67,29 @@ class GeotagPage extends GetView<GeotagController> {
                         "Geser peta untuk memindahkan penanda, lalu tekan simpan (master location)",
                         color: Colors.white,
                         fontSize: 18.sp,
+                        textAlign: TextAlign.center,
                         maxLines: 2,
                         padding: EdgeInsets.symmetric(
                             horizontal: defaultMargin.w, vertical: 2.h),
                       ),
                     ),
-                    SubmitButton("Simpan", color: kGreenColor, onTap: () {
-                      AppDialog.showAlert(
-                        btnLeft: "Tidak",
-                        btnRight: "Iya",
-                        desc: "untuk menyimpan master location",
-                        onBtnRight: () {
-                          Get.back();
-                          controller.saveMasterLocation();
-                        },
-                        title: "Apakah anda yakin ?",
-                      );
-                    })
+                    SubmitButton(
+                      "SIMPAN",
+                      color: kGreenColor,
+                      onTap: () {
+                        AppDialog.showAlert(
+                          btnLeft: "Tidak",
+                          btnRight: "Iya",
+                          desc: "untuk menyimpan master location",
+                          onBtnRight: () {
+                            Get.back();
+                            controller.saveMasterLocation();
+                          },
+                          title: "Apakah anda yakin ?",
+                        );
+                      },
+                      backroundColor: Colors.transparent,
+                    )
                   ],
                 )
               ],

@@ -11,8 +11,8 @@ class AttendanceController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     getAll();
+    super.onInit();
   }
 
   getAll() async {

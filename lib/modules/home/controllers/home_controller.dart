@@ -16,8 +16,8 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     getTimeNow();
+    super.onInit();
   }
 
   getTimeNow() {
@@ -58,7 +58,7 @@ class HomeController extends GetxController {
         print(getAttendance);
         AppSnackBar.success(
           "Kehadiran diterima, anda dalam jangkauan 50 meter dari target lokasi",
-          title: "Approved",
+          title: "Attendance Approved",
           seconds: 6,
         );
       }
