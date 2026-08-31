@@ -19,8 +19,8 @@ class ApiClient {
 
   ApiClient(this.dio) {
     dio.options.headers["Authorization"] = AuthPrefs.getToken();
-    dio.options.connectTimeout = const Duration(minutes: 1).inMilliseconds;
-    dio.options.receiveTimeout = const Duration(minutes: 1).inMilliseconds;
+    dio.options.connectTimeout = const Duration(minutes: 1);
+    dio.options.receiveTimeout = const Duration(minutes: 1);
 
     dio.interceptors.addAll([
       PrettyDioLogger(
@@ -97,19 +97,19 @@ class ApiClient {
       } on InternalServerApiError {
         throw InternalServerException();
       } on UnauthorizedApiError catch (e) {
-        throw UnauthenticatedException(errorMessage: e.message);
+        throw UnauthenticatedException(errorMessage: e.message ?? '');
       } on ApiErrorMessageError catch (e) {
         throw ApiErrorMessageException(errorMessage: e.errorMessage);
-      } on DioError catch (e) {
-        if (e.type == DioErrorType.response) {
+      } on DioException catch (e) {
+        if (e.type == DioExceptionType.badResponse) {
           return _handleResponse(e.response!);
-        } else if (e.type == DioErrorType.connectTimeout) {
+        } else if (e.type == DioExceptionType.connectionTimeout) {
           _getMessage('timeout');
-        } else if (e.type == DioErrorType.receiveTimeout) {
+        } else if (e.type == DioExceptionType.receiveTimeout) {
           _getMessage('timeout');
-        } else if (e.type == DioErrorType.sendTimeout) {
+        } else if (e.type == DioExceptionType.sendTimeout) {
           _getMessage('timeout');
-        } else if (e.type == DioErrorType.other) {
+        } else {
           _getMessage('error');
         }
       }
@@ -130,19 +130,19 @@ class ApiClient {
       } on InternalServerApiError {
         throw InternalServerException();
       } on UnauthorizedApiError catch (e) {
-        throw UnauthenticatedException(errorMessage: e.message);
+        throw UnauthenticatedException(errorMessage: e.message ?? '');
       } on ApiErrorMessageError catch (e) {
         throw ApiErrorMessageException(errorMessage: e.errorMessage);
-      } on DioError catch (e) {
-        if (e.type == DioErrorType.response) {
+      } on DioException catch (e) {
+        if (e.type == DioExceptionType.badResponse) {
           return _handleResponse(e.response!);
-        } else if (e.type == DioErrorType.connectTimeout) {
+        } else if (e.type == DioExceptionType.connectionTimeout) {
           _getMessage('timeout');
-        } else if (e.type == DioErrorType.receiveTimeout) {
+        } else if (e.type == DioExceptionType.receiveTimeout) {
           _getMessage('timeout');
-        } else if (e.type == DioErrorType.sendTimeout) {
+        } else if (e.type == DioExceptionType.sendTimeout) {
           _getMessage('timeout');
-        } else if (e.type == DioErrorType.other) {
+        } else {
           _getMessage('error');
         }
       }
@@ -162,19 +162,19 @@ class ApiClient {
       } on InternalServerApiError {
         throw InternalServerException();
       } on UnauthorizedApiError catch (e) {
-        throw UnauthenticatedException(errorMessage: e.message);
+        throw UnauthenticatedException(errorMessage: e.message ?? '');
       } on ApiErrorMessageError catch (e) {
         throw ApiErrorMessageException(errorMessage: e.errorMessage);
-      } on DioError catch (e) {
-        if (e.type == DioErrorType.response) {
+      } on DioException catch (e) {
+        if (e.type == DioExceptionType.badResponse) {
           return _handleResponse(e.response!);
-        } else if (e.type == DioErrorType.connectTimeout) {
+        } else if (e.type == DioExceptionType.connectionTimeout) {
           _getMessage('timeout');
-        } else if (e.type == DioErrorType.receiveTimeout) {
+        } else if (e.type == DioExceptionType.receiveTimeout) {
           _getMessage('timeout');
-        } else if (e.type == DioErrorType.sendTimeout) {
+        } else if (e.type == DioExceptionType.sendTimeout) {
           _getMessage('timeout');
-        } else if (e.type == DioErrorType.other) {
+        } else {
           _getMessage('error');
         }
       }
@@ -201,19 +201,19 @@ class ApiClient {
       } on InternalServerApiError {
         throw InternalServerException();
       } on UnauthorizedApiError catch (e) {
-        throw UnauthenticatedException(errorMessage: e.message);
+        throw UnauthenticatedException(errorMessage: e.message ?? '');
       } on ApiErrorMessageError catch (e) {
         throw ApiErrorMessageException(errorMessage: e.errorMessage);
-      } on DioError catch (e) {
-        if (e.type == DioErrorType.response) {
+      } on DioException catch (e) {
+        if (e.type == DioExceptionType.badResponse) {
           return _handleResponse(e.response!);
-        } else if (e.type == DioErrorType.connectTimeout) {
+        } else if (e.type == DioExceptionType.connectionTimeout) {
           _getMessage('timeout');
-        } else if (e.type == DioErrorType.receiveTimeout) {
+        } else if (e.type == DioExceptionType.receiveTimeout) {
           _getMessage('timeout');
-        } else if (e.type == DioErrorType.sendTimeout) {
+        } else if (e.type == DioExceptionType.sendTimeout) {
           _getMessage('timeout');
-        } else if (e.type == DioErrorType.other) {
+        } else {
           _getMessage('error');
         }
       }

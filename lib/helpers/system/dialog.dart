@@ -1,5 +1,4 @@
 import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/shared/constants.dart';
 import 'package:logistika/shared/theme.dart';
 import 'package:logistika/shared/widgets/components/img_network.dart';
 import 'package:logistika/shared/widgets/text_app.dart';

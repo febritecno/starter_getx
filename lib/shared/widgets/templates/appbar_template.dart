@@ -10,8 +10,8 @@ class AppbarTemplate extends StatelessWidget {
       this.children,
       this.weight,
       required this.title,
-      this.isCenter: true,
-      this.isCustom: false,
+      this.isCenter = true,
+      this.isCustom = false,
       this.body,
       this.onBack})
       : super(key: key);

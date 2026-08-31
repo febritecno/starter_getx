@@ -15,7 +15,7 @@ class ImgNetwork extends StatelessWidget {
       this.loaderWidth,
       this.loaderRadius = 0,
       this.fit,
-      this.defaultPath: NO_IMAGE})
+      this.defaultPath = NO_IMAGE})
       : super(key: key);
   @override
   Widget build(BuildContext context) {

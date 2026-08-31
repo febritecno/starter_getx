@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:logistika/shared/widgets/loading_app.dart';
 import 'package:logistika/shared/widgets/templates/appbar_template.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +7,10 @@ class WebViewTemplate extends StatefulWidget {
   final String? title;
   final String? url;
   const WebViewTemplate({
+    Key? key,
     required this.title,
-    this.url: "",
-  });
+    this.url = "",
+  }) : super(key: key);
 
   @override
   WebViewTemplateState createState() => WebViewTemplateState();
@@ -18,12 +18,30 @@ class WebViewTemplate extends StatefulWidget {
 
 class WebViewTemplateState extends State<WebViewTemplate> {
   var isLoading = false;
+  late final WebViewController controller;
 
   @override
   void initState() {
     super.initState();
-    // Enable virtual display.
-    if (Platform.isAndroid) WebView.platform = AndroidWebView();
+    controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(Colors.white)
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            debugPrint('WebView is loading (progress : $progress%)');
+          },
+          onPageStarted: (String url) {
+            debugPrint('Page started loading: $url');
+            setState(() => isLoading = true);
+          },
+          onPageFinished: (String url) {
+            debugPrint('Page finished loading: $url');
+            setState(() => isLoading = false);
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse(widget.url ?? ""));
   }
 
   @override
@@ -33,25 +51,7 @@ class WebViewTemplateState extends State<WebViewTemplate> {
       child: AppbarTemplate(
         title: widget.title!,
         isCustom: true,
-        body: WebView(
-          initialUrl: widget.url,
-          javascriptMode: JavascriptMode.unrestricted,
-          onWebViewCreated: (WebViewController webViewController) {},
-          onProgress: (int progress) {
-            print('WebView is loading (progress : $progress%)');
-          },
-          javascriptChannels: <JavascriptChannel>{},
-          onPageStarted: (String percent) {
-            print('Page started loading: $percent');
-            setState(() => isLoading = true);
-          },
-          onPageFinished: (String percent) {
-            print('Page finished loading: $percent');
-            setState(() => isLoading = false);
-          },
-          gestureNavigationEnabled: true,
-          backgroundColor: Colors.white,
-        ),
+        body: WebViewWidget(controller: controller),
       ),
     );
   }

@@ -48,7 +48,7 @@ class TextFieldApp extends StatelessWidget {
       this.readOnly,
       this.paddingHorizontal,
       this.paddingVertical,
-      this.isLabel: true,
+      this.isLabel = true,
       this.placeholder,
       this.hintText,
       this.keyboardType,

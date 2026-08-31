@@ -12,8 +12,8 @@ class PdfViewTemplate extends StatefulWidget {
 
   const PdfViewTemplate(
       {Key? key,
-      this.title: "Reader",
-      this.url: "http://www.africau.edu/images/default/sample.pdf"})
+      this.title = "Reader",
+      this.url = "http://www.africau.edu/images/default/sample.pdf"})
       : super(key: key);
 
   @override

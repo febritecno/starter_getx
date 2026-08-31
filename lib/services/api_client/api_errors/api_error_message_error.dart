@@ -4,11 +4,11 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'api_error_message_error.g.dart';
 
-class ApiErrorMessageError extends DioError {
+class ApiErrorMessageError extends DioException {
   @JsonKey(name: 'error_message')
   final String errorMessage;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   RequestOptions request;
 
   // @override
