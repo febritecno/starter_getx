@@ -12,13 +12,10 @@ class DashboardController extends GetxController {
     if (tabIndex != 0) {
       switch (tabIndex) {
         case 1:
-          // Get.find<GroupController>().onInit();
+          // Get.find<ProfileController>().onInit();
           break;
         case 2:
-          // Get.find<ReferensiController>().onInit();
-          break;
-        case 3:
-          // Get.find<ProfileController>().onInit();
+          // Get.find<SettingsController>().onInit();
           break;
         default:
       }
