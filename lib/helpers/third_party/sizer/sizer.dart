@@ -1,8 +1,8 @@
-library sizer;
+library;
 
-import 'package:flutter/widgets.dart';
-import 'package:universal_io/io.dart' show Platform;
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:universal_io/io.dart';
 
 part 'extension.dart';
 

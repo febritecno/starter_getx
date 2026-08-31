@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:logistika/shared/widgets/templates/appbar_template.dart';
+import 'package:myapp/shared/widgets/templates/appbar_template.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -11,10 +11,9 @@ class PdfViewTemplate extends StatefulWidget {
   final String? title, url;
 
   const PdfViewTemplate(
-      {Key? key,
+      {super.key,
       this.title = "Reader",
-      this.url = "http://www.africau.edu/images/default/sample.pdf"})
-      : super(key: key);
+      this.url = "http://www.africau.edu/images/default/sample.pdf"});
 
   @override
   State<PdfViewTemplate> createState() => _PdfViewTemplateState();
@@ -32,14 +31,14 @@ class _PdfViewTemplateState extends State<PdfViewTemplate> {
   @override
   void initState() {
     createFileOfPdfUrl().then((f) {
-      setState(() => remotePDFpath = "${f.path}");
+      setState(() => remotePDFpath = f.path);
     });
     super.initState();
   }
 
   Future<File> createFileOfPdfUrl() async {
     Completer<File> completer = Completer();
-    print("Start download file from internet!");
+    debugPrint("Start download file from internet!");
     try {
       final url = widget.url!;
       final filename = url.substring(url.lastIndexOf("/") + 1);
@@ -47,8 +46,8 @@ class _PdfViewTemplateState extends State<PdfViewTemplate> {
       var response = await request.close();
       var bytes = await consolidateHttpClientResponseBytes(response);
       var dir = await getApplicationDocumentsDirectory();
-      print("Download files");
-      print("${dir.path}/$filename");
+      debugPrint("Download files");
+      debugPrint("${dir.path}/$filename");
       final path = "${dir.path}/$filename";
       File file = File(path);
       await file.writeAsBytes(bytes, flush: true);
@@ -76,20 +75,20 @@ class _PdfViewTemplateState extends State<PdfViewTemplate> {
                   swipeHorizontal: false,
                   autoSpacing: true,
                   pageFling: true,
-                  onRender: (_pages) {
+                  onRender: (pages) {
                     setState(() {
-                      pages = _pages;
+                      pages = pages;
                       isReady = true;
                     });
                   },
                   onError: (error) {
-                    print(error.toString());
+                    debugPrint(error.toString());
                     setState(() {
                       errorMessage = "Not Found";
                     });
                   },
                   onPageError: (page, error) {
-                    print('$page: ${error.toString()}');
+                    debugPrint('$page: ${error.toString()}');
                     setState(() {
                       errorMessage = "$page: ${error.toString()}";
                     });

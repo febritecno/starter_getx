@@ -1,6 +1,6 @@
-import 'package:logistika/helpers/helpers.dart';
-import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/shared/widgets/text_app.dart';
+import 'package:myapp/helpers/helpers.dart';
+import 'package:myapp/helpers/third_party/sizer/sizer.dart';
+import 'package:myapp/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -29,7 +29,7 @@ class TextFieldApp extends StatelessWidget {
   final Widget? prefixIcon;
 
   const TextFieldApp(
-      {Key? key,
+      {super.key,
       this.label,
       this.suffix,
       this.prefix,
@@ -60,17 +60,16 @@ class TextFieldApp extends StatelessWidget {
       this.minLines,
       this.color,
       this.prefixIcon,
-      this.placeholderStyle})
-      : super(key: key);
+      this.placeholderStyle});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: paddingVertical ?? 0.h,
-        bottom: paddingVertical ?? 3.h,
-        left: paddingHorizontal ?? 0.w,
-        right: paddingHorizontal ?? 0.w,
+        top: paddingVertical ?? 0.hp,
+        bottom: paddingVertical ?? 3.hp,
+        left: paddingHorizontal ?? 0.wp,
+        right: paddingHorizontal ?? 0.wp,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -80,7 +79,7 @@ class TextFieldApp extends StatelessWidget {
               ? TextApp(label ?? 'label',
                   color: Colors.grey,
                   fontWeight: fontWeight ?? FontWeight.bold,
-                  fontSize: labelSize ?? 14.sp)
+                  fontSize: labelSize ?? 14.spp)
               : Container(),
           Stack(
             children: [
@@ -96,7 +95,7 @@ class TextFieldApp extends StatelessWidget {
                 style: TextStyle(
                     color: color ?? Colors.grey,
                     fontWeight: fontWeight ?? FontWeight.w400,
-                    fontSize: fontSize ?? 14.sp),
+                    fontSize: fontSize ?? 14.spp),
                 initialValue: initialValue,
                 decoration: InputDecoration(
                   hintText: hintText,
@@ -119,15 +118,16 @@ class TextFieldApp extends StatelessWidget {
                     borderSide: BorderSide(color: Colors.grey.shade400),
                   ),
                   contentPadding: contentPadding ??
-                      EdgeInsets.symmetric(horizontal: 0.h, vertical: 1.h),
+                      EdgeInsets.symmetric(horizontal: 0.hp, vertical: 1.hp),
                 ),
                 keyboardType: keyboardType ?? TextInputType.text,
                 inputFormatters: inputFormatters ?? [],
               ),
-              Container(
-                height: 5.h,
+              SizedBox(
+                height: 5.hp,
                 width: Helpers.width(context),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
                       width: prefixSize ?? 0,
@@ -143,7 +143,6 @@ class TextFieldApp extends StatelessWidget {
                           child: suffix),
                     )
                   ],
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),
               ),
             ],

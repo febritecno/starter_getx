@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ScaffoldApp extends StatelessWidget {
-  final Key? key;
   final PreferredSizeWidget? appBar;
   final Widget? body;
   final Widget? floatingActionButton;
@@ -28,9 +27,8 @@ class ScaffoldApp extends StatelessWidget {
   final bool endDrawerEnableOpenDragGesture = true;
   final String? restorationId;
 
-  const ScaffoldApp({
+  const ScaffoldApp({super.key,
     this.appBar,
-    this.key,
     this.body,
     this.floatingActionButton,
     this.floatingActionButtonLocation,

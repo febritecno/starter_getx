@@ -1,4 +1,4 @@
-import 'package:logistika/shared/widgets/text_app.dart';
+import 'package:myapp/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 
 class RoundedButton extends StatelessWidget {
@@ -11,15 +11,14 @@ class RoundedButton extends StatelessWidget {
   final LinearGradient? linearGradient;
 
   const RoundedButton(this.title,
-      {Key? key,
+      {super.key,
       this.onTap,
       this.fontSize,
       this.color,
       this.fontWeight,
       this.borderCircular,
       this.fontColor,
-      this.linearGradient})
-      : super(key: key);
+      this.linearGradient});
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +30,16 @@ class RoundedButton extends StatelessWidget {
             BoxShadow(
                 color: Colors.black26, offset: Offset(0, 4), blurRadius: 5.0)
           ],
-          gradient: linearGradient ?? null,
+          gradient: linearGradient,
           color: color,
           borderRadius: BorderRadius.circular(borderCircular ?? 20)),
       child: ElevatedButton(
         onPressed: onTap,
         style: ButtonStyle(
-          shadowColor: MaterialStateProperty.all(Colors.transparent),
-          backgroundColor: MaterialStateProperty.all(Colors.transparent),
-          elevation: MaterialStateProperty.all<double>(0),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          shadowColor: WidgetStateProperty.all(Colors.transparent),
+          backgroundColor: WidgetStateProperty.all(Colors.transparent),
+          elevation: WidgetStateProperty.all<double>(0),
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(
                 borderCircular ?? 20,

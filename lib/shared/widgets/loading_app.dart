@@ -1,6 +1,6 @@
-import 'package:logistika/shared/theme.dart';
+import 'package:myapp/shared/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:logistika/helpers/helpers.dart';
+import 'package:myapp/helpers/helpers.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoadingApp extends StatefulWidget {
@@ -10,7 +10,7 @@ class LoadingApp extends StatefulWidget {
   final Widget? progressIndicator;
   final Widget child;
 
-  const LoadingApp({
+  const LoadingApp({super.key, 
     required this.isLoading,
     required this.child,
     this.opacity = 0.5,
@@ -38,14 +38,11 @@ class _LoadingAppState extends State<LoadingApp>
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
     _animation.addStatusListener((status) {
-      // ignore: unnecessary_statements
-      status == AnimationStatus.forward
-          ? setState(() => {_overlayVisible = true})
-          : null;
-      // ignore: unnecessary_statements
-      status == AnimationStatus.dismissed
-          ? setState(() => {_overlayVisible = false})
-          : null;
+      if (status == AnimationStatus.forward) {
+        setState(() => _overlayVisible = true);
+      } else if (status == AnimationStatus.dismissed) {
+        setState(() => _overlayVisible = false);
+      }
     });
     if (widget.isLoading) {
       _controller.forward();
@@ -81,27 +78,27 @@ class _LoadingAppState extends State<LoadingApp>
         child: Stack(
           children: <Widget>[
             Opacity(
+              opacity: widget.opacity,
               child: ModalBarrier(
                 dismissible: false,
                 color: widget.backroundColor ??
-                    Theme.of(context).colorScheme.background,
+                    Theme.of(context).colorScheme.surface,
               ),
-              opacity: widget.opacity,
             ),
             Center(
               child: Container(
                 width: sizeContainer,
                 height: sizeContainer,
-                child: CircleLoading(
-                  progressIndicator: widget.progressIndicator,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                ),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
                     Radius.circular(Helpers.percentWidth(context, 6)),
                   ),
+                ),
+                child: CircleLoading(
+                  progressIndicator: widget.progressIndicator,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                 ),
               ),
             )
@@ -123,7 +120,7 @@ class CircleLoading extends StatelessWidget {
   final Widget? progressIndicator;
 
   const CircleLoading(
-      {this.sizeHeight = 60,
+      {super.key, this.sizeHeight = 60,
       this.mainAxisAlignment = MainAxisAlignment.center,
       this.crossAxisAlignment = CrossAxisAlignment.center,
       this.progressIndicator,
@@ -135,14 +132,14 @@ class CircleLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = (MediaQuery.of(context).size.width);
     return SizedBox(
+      width: width,
+      height: sizeHeight,
       child: Center(
           child: progressIndicator ??
               LoadingAnimationWidget.twistingDots(
                   leftDotColor: kDarkBlueColor,
                   rightDotColor: kBlueColor,
                   size: width * 16 / 100)),
-      width: width,
-      height: sizeHeight,
     );
   }
 }

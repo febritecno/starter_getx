@@ -1,4 +1,4 @@
-part of sizer;
+part of 'sizer.dart';
 
 /// Provides `Context`, `Orientation`, and `DeviceType` parameters to the builder function
 typedef ResponsiveBuild = Widget Function(
@@ -11,7 +11,7 @@ typedef ResponsiveBuild = Widget Function(
 ///
 /// Usage: Wrap MaterialApp with this widget
 class Sizer extends StatelessWidget {
-  const Sizer({Key? key, required this.builder}) : super(key: key);
+  const Sizer({super.key, required this.builder});
 
   /// Builds the widget whenever the orientation changes
   final ResponsiveBuild builder;

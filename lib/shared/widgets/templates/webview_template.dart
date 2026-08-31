@@ -1,5 +1,5 @@
-import 'package:logistika/shared/widgets/loading_app.dart';
-import 'package:logistika/shared/widgets/templates/appbar_template.dart';
+import 'package:myapp/shared/widgets/loading_app.dart';
+import 'package:myapp/shared/widgets/templates/appbar_template.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -7,10 +7,10 @@ class WebViewTemplate extends StatefulWidget {
   final String? title;
   final String? url;
   const WebViewTemplate({
-    Key? key,
+    super.key,
     required this.title,
     this.url = "",
-  }) : super(key: key);
+  });
 
   @override
   WebViewTemplateState createState() => WebViewTemplateState();

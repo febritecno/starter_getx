@@ -1,7 +1,7 @@
-import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/shared/theme.dart';
-import 'package:logistika/shared/widgets/components/img_network.dart';
-import 'package:logistika/shared/widgets/text_app.dart';
+import 'package:myapp/shared/theme.dart';
+import 'package:myapp/helpers/third_party/sizer/sizer.dart';
+import 'package:myapp/shared/widgets/components/img_network.dart';
+import 'package:myapp/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,16 +50,16 @@ class PreviewItem extends StatelessWidget {
   final String? image;
 
   const PreviewItem({
-    Key? key,
+    super.key,
     this.image,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: () => Get.back(),
       child: Container(
-        color: Colors.black.withOpacity(0.8),
+        color: Colors.black.withValues(alpha: 0.8),
         child: InteractiveViewer(
           panEnabled: false,
           boundaryMargin: EdgeInsets.all(100),
@@ -86,7 +86,7 @@ class AlertItem extends StatelessWidget {
   final VoidCallback? onBtnLeft, onBtnRight;
 
   const AlertItem({
-    Key? key,
+    super.key,
     this.title,
     this.desc,
     this.btnLeft,
@@ -95,20 +95,20 @@ class AlertItem extends StatelessWidget {
     this.onBtnRight,
     this.body,
     this.footer,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       content: ConstrainedBox(
         constraints: BoxConstraints(
-          //* atur maxHeight buat batasin ukuran dialog 100.h = 100% full screen di layar
-          maxHeight: 80.h,
+          //* atur maxHeight buat batasin ukuran dialog 100.hp = 100% full screen di layar
+          maxHeight: 80.hp,
         ),
         child: Container(
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            color: Color(0xFFFFFF),
+            color: Color(0x00ffffff),
             borderRadius: BorderRadius.all(Radius.circular(32)),
           ),
           child: Column(
@@ -123,16 +123,16 @@ class AlertItem extends StatelessWidget {
                           title!,
                           color: kBlueColor,
                           fontWeight: FontWeight.w900,
-                          fontSize: 16.sp,
+                          fontSize: 16.spp,
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.clip,
                           maxLines: 2,
                         ),
-                        SizedBox(height: 2.h),
+                        SizedBox(height: 2.hp),
                         TextApp(
                           desc!,
                           fontWeight: FontWeight.w400,
-                          fontSize: 14.sp,
+                          fontSize: 14.spp,
                           textAlign: TextAlign.center,
                           // *atur maxLines buat batasin max baris yang ditampilkan
                           maxLines: 18,
@@ -144,25 +144,25 @@ class AlertItem extends StatelessWidget {
                   : body!,
               footer == null
                   ? Padding(
-                      padding: EdgeInsets.only(top: 4.h),
+                      padding: EdgeInsets.only(top: 4.hp),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ElevatedButton(
                               style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
+                                    WidgetStateProperty.resolveWith<Color>(
+                                  (Set<WidgetState> states) {
                                     return kBlueColor;
                                   },
                                 ),
-                                padding: MaterialStateProperty.all(
+                                padding: WidgetStateProperty.all(
                                     EdgeInsets.symmetric(
                                         vertical: 0, horizontal: 0)),
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                 minimumSize:
-                                    MaterialStateProperty.all(Size(30.w, 20)),
-                                shape: MaterialStateProperty.all<
+                                    WidgetStateProperty.all(Size(30.wp, 20)),
+                                shape: WidgetStateProperty.all<
                                         RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6.0),
@@ -172,31 +172,31 @@ class AlertItem extends StatelessWidget {
                                   onBtnLeft ?? () => Navigator.pop(context),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 1.w, vertical: 1.5.h),
+                                    horizontal: 1.wp, vertical: 1.5.hp),
                                 child: TextApp(
                                   btnLeft!,
-                                  fontSize: 12.sp,
+                                  fontSize: 12.spp,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
                                 ),
                               )),
                           // *atur jarak kedua tombol agar engga gancet ketika text cuma sebiji
-                          SizedBox(width: 3.w),
+                          SizedBox(width: 3.wp),
                           ElevatedButton(
                             style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.resolveWith<Color>(
-                                (Set<MaterialState> states) {
+                                  WidgetStateProperty.resolveWith<Color>(
+                                (Set<WidgetState> states) {
                                   return kBlueColor;
                                 },
                               ),
-                              padding: MaterialStateProperty.all(
+                              padding: WidgetStateProperty.all(
                                   EdgeInsets.symmetric(
                                       vertical: 0, horizontal: 0)),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               minimumSize:
-                                  MaterialStateProperty.all(Size(30.w, 20)),
-                              shape: MaterialStateProperty.all<
+                                  WidgetStateProperty.all(Size(30.wp, 20)),
+                              shape: WidgetStateProperty.all<
                                       RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(6.0),
@@ -205,10 +205,10 @@ class AlertItem extends StatelessWidget {
                             onPressed: onBtnRight,
                             child: Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 1.w, vertical: 1.5.h),
+                                  horizontal: 1.wp, vertical: 1.5.hp),
                               child: TextApp(
                                 btnRight!,
-                                fontSize: 12.sp,
+                                fontSize: 12.spp,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700,
                               ),

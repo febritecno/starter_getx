@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:logistika/shared/theme.dart';
+import 'package:myapp/shared/theme.dart';
 
 class CircleLoading extends StatelessWidget {
   final double sizeHeight, strokeWidth;
@@ -8,7 +8,7 @@ class CircleLoading extends StatelessWidget {
   final CrossAxisAlignment crossAxisAlignment;
 
   const CircleLoading(
-      {this.sizeHeight = 60,
+      {super.key, this.sizeHeight = 60,
       this.mainAxisAlignment = MainAxisAlignment.center,
       this.crossAxisAlignment = CrossAxisAlignment.center,
       this.color,
@@ -20,7 +20,11 @@ class CircleLoading extends StatelessWidget {
     final height = (MediaQuery.of(context).size.height);
     final width = (MediaQuery.of(context).size.width);
     return SizedBox(
+      width: width,
+      height: sizeHeight,
       child: Column(
+        mainAxisAlignment: mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment,
         children: [
           CircularProgressIndicator(
             backgroundColor: backroundColor ?? Colors.grey[300],
@@ -28,11 +32,7 @@ class CircleLoading extends StatelessWidget {
             strokeWidth: height * strokeWidth / 100,
           )
         ],
-        mainAxisAlignment: mainAxisAlignment,
-        crossAxisAlignment: crossAxisAlignment,
       ),
-      width: width,
-      height: sizeHeight,
     );
   }
 }

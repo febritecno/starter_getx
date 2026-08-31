@@ -1,17 +1,16 @@
-import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/modules/auth/controllers/auth_controller.dart';
-import 'package:logistika/routes/app_pages.dart';
-import 'package:logistika/routes/routes.dart';
-import 'package:logistika/shared/constants.dart';
-import 'package:logistika/shared/widgets/loading_app.dart';
-import 'package:logistika/shared/widgets/text_app.dart';
-import 'package:logistika/shared/theme.dart';
-import 'package:logistika/shared/widgets/components/rounded_button.dart';
+import 'package:myapp/modules/auth/controllers/auth_controller.dart';
+import 'package:myapp/helpers/third_party/sizer/sizer.dart';
+import 'package:myapp/routes/app_pages.dart';
+import 'package:myapp/shared/constants.dart';
+import 'package:myapp/shared/widgets/loading_app.dart';
+import 'package:myapp/shared/widgets/text_app.dart';
+import 'package:myapp/shared/theme.dart';
+import 'package:myapp/shared/widgets/components/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends GetView<AuthController> {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,28 +28,30 @@ class LoginPage extends GetView<AuthController> {
                 Column(
                   children: [
                     Container(
-                        padding: EdgeInsets.only(top: 20.w, bottom: 14.w),
+                        padding: EdgeInsets.only(top: 20.wp, bottom: 14.wp),
                         alignment: Alignment.topCenter,
-                        child: Image.asset(IMAGE_PATH + 'logistika_login.png',
-                            height: 20.w)),
+                        child: Image.asset('${IMAGE_PATH}app_logo.png',
+                            height: 24.wp)),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      padding: EdgeInsets.symmetric(horizontal: 10.wp),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          TextApp('Welcome to Logistika',
+                          TextApp('Welcome to MyApp',
                               color: Colors.white,
                               textAlign: TextAlign.start,
-                              fontSize: 20.sp,
-                              padding: EdgeInsets.only(bottom: 2.h),
+                              fontSize: 20.spp,
+                              padding: EdgeInsets.only(bottom: 2.hp),
                               fontWeight: FontWeight.w800),
-                          TextApp('User Nama',
+                          TextApp('Username',
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              padding: EdgeInsets.symmetric(vertical: 1.2.h),
-                              fontSize: 12.sp),
+                              padding: EdgeInsets.symmetric(vertical: 1.2.hp),
+                              fontSize: 12.spp),
                           TextFormField(
+                            controller: controller.loginUsernameText,
+                            keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: const BorderSide(
@@ -66,20 +67,22 @@ class LoginPage extends GetView<AuthController> {
                                   borderRadius: BorderRadius.circular(12)),
                               filled: true,
                               contentPadding: EdgeInsets.symmetric(
-                                  vertical: 2.h, horizontal: 4.w),
+                                  vertical: 2.hp, horizontal: 4.wp),
                               hintStyle: TextStyle(color: Colors.white),
-                              hintText: "Nama",
+                              hintText: "username (try: emilys)",
                               fillColor: kSemiBlueColor,
                             ),
                             style: TextStyle(color: Colors.white),
                           ),
-                          SizedBox(height: 1.h),
+                          SizedBox(height: 1.hp),
                           TextApp('Password',
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              padding: EdgeInsets.symmetric(vertical: 1.2.h),
-                              fontSize: 12.sp),
+                              padding: EdgeInsets.symmetric(vertical: 1.2.hp),
+                              fontSize: 12.spp),
                           TextFormField(
+                            controller: controller.loginPasswordText,
+                            obscureText: controller.isObscureText.value,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: const BorderSide(
@@ -97,8 +100,8 @@ class LoginPage extends GetView<AuthController> {
                               hintStyle: TextStyle(color: Colors.white),
                               suffixIconColor: Colors.white,
                               contentPadding: EdgeInsets.symmetric(
-                                  vertical: 2.h, horizontal: 4.w),
-                              hintText: "Password",
+                                  vertical: 2.hp, horizontal: 4.wp),
+                              hintText: "password (try: emilyspass)",
                               fillColor: kSemiBlueColor,
                               suffixIcon: IconButton(
                                 color: Colors.white,
@@ -110,13 +113,13 @@ class LoginPage extends GetView<AuthController> {
                             ),
                             style: TextStyle(color: Colors.white),
                           ),
-                          SizedBox(height: 2.h),
+                          SizedBox(height: 2.hp),
                           Padding(
-                            padding: EdgeInsets.symmetric(vertical: 2.h),
+                            padding: EdgeInsets.symmetric(vertical: 2.hp),
                             child: Column(children: [
                               RoundedButton(
                                 'LOG IN',
-                                fontSize: 16.sp,
+                                fontSize: 16.spp,
                                 fontWeight: extraBold,
                                 linearGradient: LinearGradient(
                                   begin: Alignment.topCenter,
@@ -127,7 +130,7 @@ class LoginPage extends GetView<AuthController> {
                                 borderCircular: 18,
                                 fontColor: kBlueColor,
                                 color: Colors.white,
-                                onTap: () => Get.toNamed(Routes.DASHBOARD),
+                                onTap: () => controller.onLogin(),
                               ),
                             ]),
                           ),
@@ -145,7 +148,7 @@ class LoginPage extends GetView<AuthController> {
                           child: TextApp(
                             'Forget Password ? ',
                             color: Colors.white,
-                            fontSize: 14.sp,
+                            fontSize: 14.spp,
                           ),
                         ),
                       ],
@@ -157,8 +160,8 @@ class LoginPage extends GetView<AuthController> {
                   color: Colors.white,
                   textAlign: TextAlign.center,
                   fontWeight: bold,
-                  padding: EdgeInsets.symmetric(vertical: 8.w),
-                  fontSize: 16.sp,
+                  padding: EdgeInsets.symmetric(vertical: 8.wp),
+                  fontSize: 16.spp,
                 ),
               ],
             ),

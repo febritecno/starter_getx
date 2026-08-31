@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import 'home_controller.dart';
@@ -7,7 +8,7 @@ class DashboardController extends GetxController {
 
   void changeTabIndex(int index) {
     tabIndex = index;
-    print("menu ke $tabIndex");
+    debugPrint("menu ke $tabIndex");
     if (tabIndex != 0) {
       switch (tabIndex) {
         case 1:

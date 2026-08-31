@@ -1,4 +1,4 @@
-import 'package:logistika/helpers/utils/prefs_utils.dart';
+import 'package:myapp/helpers/utils/prefs_utils.dart';
 
 class AuthPrefs {
   //remove key

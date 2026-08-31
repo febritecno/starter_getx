@@ -1,4 +1,4 @@
-# logistika
+# myapp
 
 A new Flutter project.
 
