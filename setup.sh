@@ -11,7 +11,12 @@
 #
 # Usage:
 #   ./setup.sh                        # interactive prompts
-#   ./setup.sh -n my_app -o com.acme -d "My App" -i ./logo.png -p ../my_app
+#   ./setup.sh -n my_app -o com.acme -d "My App" -i ./icon.png -l ./logo.png -p ../my_app
+#
+# Flags:
+#   -n package name (lowercase_snake)   -o org (reverse-domain)
+#   -d display name                     -i app/launcher icon png (optional)
+#   -l in-app logo png (login+splash)   -p output dir
 #
 set -euo pipefail
 
@@ -25,13 +30,14 @@ BOILERPLATE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TOKEN="myapp"   # placeholder package name baked into the boilerplate
 
 # ---- args -----------------------------------------------------------------
-PKG=""; ORG=""; DISPLAY=""; ICON=""; OUT=""
-while getopts "n:o:d:i:p:h" opt; do
+PKG=""; ORG=""; DISPLAY=""; ICON=""; LOGO=""; OUT=""
+while getopts "n:o:d:i:l:p:h" opt; do
   case "$opt" in
     n) PKG="$OPTARG" ;;
     o) ORG="$OPTARG" ;;
     d) DISPLAY="$OPTARG" ;;
     i) ICON="$OPTARG" ;;
+    l) LOGO="$OPTARG" ;;
     p) OUT="$OPTARG" ;;
     h) grep '^#' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
     *) die "unknown flag (use -h)";;
@@ -48,6 +54,7 @@ ask() { local q="$1" def="${2:-}" ans; read -rp "$q${def:+ [$def]}: " ans; echo 
 [ -z "$ORG" ]     && ORG="$(ask 'Organization (reverse-domain)' 'com.example')"
 [ -z "$DISPLAY" ] && DISPLAY="$(ask 'Display name (shown under the icon)' "$PKG")"
 [ -z "$ICON" ]    && ICON="$(ask 'App icon path (1024x1024 png, blank = keep default)' '')"
+[ -z "$LOGO" ]    && LOGO="$(ask 'In-app logo/image path (login+splash, blank = keep default)' '')"
 [ -z "$OUT" ]     && OUT="$(ask 'Output directory' "../$PKG")"
 
 # ---- validation -----------------------------------------------------------
@@ -56,6 +63,7 @@ ask() { local q="$1" def="${2:-}" ans; read -rp "$q${def:+ [$def]}: " ans; echo 
 [[ "$ORG" =~ ^[a-z][a-z0-9_]*(\.[a-z0-9_]+)+$ ]] || die "org must be reverse-domain (got: $ORG)"
 [ -e "$OUT" ] && die "output dir already exists: $OUT"
 [ -n "$ICON" ] && [ ! -f "$ICON" ] && die "icon file not found: $ICON"
+[ -n "$LOGO" ] && [ ! -f "$LOGO" ] && die "logo file not found: $LOGO"
 
 APP_ID="$ORG.$PKG"
 info "Creating $c_dim$APP_ID$c_reset at $c_dim$OUT$c_reset"
@@ -115,9 +123,17 @@ if [ -f "$PLIST" ]; then
 fi
 ok "set display name + INTERNET permission"
 
-# ---- 5. deps + icon -------------------------------------------------------
+# ---- 5. deps + assets -----------------------------------------------------
+# In-app logo (login + splash screens) -> assets/images/app_logo.png
+if [ -n "$LOGO" ]; then
+  mkdir -p "$OUT/assets/images"
+  cp "$LOGO" "$OUT/assets/images/app_logo.png"
+  ok "in-app logo set"
+fi
+
 ( cd "$OUT" && flutter pub get >/dev/null ) && ok "flutter pub get"
 
+# App/launcher icon -> assets/icons/app_icon.png (needs deps resolved first)
 if [ -n "$ICON" ]; then
   cp "$ICON" "$OUT/assets/icons/app_icon.png"
   ( cd "$OUT" && dart run flutter_launcher_icons >/dev/null 2>&1 ) && ok "app icon generated"
