@@ -1,6 +1,6 @@
-import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/shared/theme.dart';
-import 'package:logistika/shared/widgets/text_app.dart';
+import 'package:myapp/shared/theme.dart';
+import 'package:myapp/helpers/third_party/sizer/sizer.dart';
+import 'package:myapp/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +35,8 @@ class AppBottomSheet {
         // safe-area bottomSheet
         Padding(
           padding: EdgeInsets.only(
-              top: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+              top: MediaQueryData.fromView(
+                      WidgetsBinding.instance.platformDispatcher.views.first)
                   .padding
                   .top),
           child: Material(
@@ -43,20 +44,20 @@ class AppBottomSheet {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4.h),
+                  padding: EdgeInsets.symmetric(vertical: 4.hp),
                   child: Stack(
                     children: [
                       GestureDetector(
                         onTap: () => Get.back(),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 4.w),
+                          padding: EdgeInsets.symmetric(horizontal: 4.wp),
                           child: Icon(Icons.close, color: Colors.grey),
                         ),
                       ),
                       Center(
                         child: TextApp(
-                          "$title",
-                          fontSize: 20.sp,
+                          title,
+                          fontSize: 20.spp,
                           fontWeight: FontWeight.w700,
                         ),
                       )
@@ -90,20 +91,20 @@ class AppBottomSheet {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 4.h),
+                padding: EdgeInsets.symmetric(vertical: 4.hp),
                 child: Stack(
                   children: [
                     GestureDetector(
                       onTap: () => Get.back(),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4.w),
+                        padding: EdgeInsets.symmetric(horizontal: 4.wp),
                         child: Icon(Icons.close, color: Colors.grey),
                       ),
                     ),
                     Center(
                       child: TextApp(
-                        "$title",
-                        fontSize: 20.sp,
+                        title,
+                        fontSize: 20.spp,
                         fontWeight: FontWeight.w700,
                       ),
                     )
@@ -124,8 +125,7 @@ class AppBottomSheet {
 }
 
 class ListBottomSheet extends StatelessWidget {
-  const ListBottomSheet({Key? key, required this.title, required this.onTap})
-      : super(key: key);
+  const ListBottomSheet({super.key, required this.title, required this.onTap});
 
   final String title;
   final Function onTap;
@@ -135,15 +135,15 @@ class ListBottomSheet extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: TextApp(title, fontSize: 16.sp, fontWeight: FontWeight.w600),
+          title: TextApp(title, fontSize: 16.spp, fontWeight: FontWeight.w600),
           onTap: () async {
             await onTap();
             Get.back();
           },
         ),
         Padding(
-            padding: EdgeInsets.symmetric(horizontal: defaultMargin.w),
-            child: Divider(height: 1.h, color: Colors.grey.shade300)),
+            padding: EdgeInsets.symmetric(horizontal: defaultMargin.wp),
+            child: Divider(height: 1.hp, color: Colors.grey.shade300)),
       ],
     );
   }
@@ -151,18 +151,18 @@ class ListBottomSheet extends StatelessWidget {
 
 class HeaderBottomSheet extends StatelessWidget {
   final dynamic height;
-  const HeaderBottomSheet({Key? key, this.height}) : super(key: key);
+  const HeaderBottomSheet({super.key, this.height});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.all(2.w),
+          padding: EdgeInsets.all(2.wp),
           child: Center(
             child: Container(
-              height: 0.8.h,
-              width: 14.w,
+              height: 0.8.hp,
+              width: 14.wp,
               decoration: BoxDecoration(
                 color: Colors.grey.shade400,
                 borderRadius: BorderRadius.circular(12),
@@ -170,7 +170,7 @@ class HeaderBottomSheet extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: height ?? 4.h),
+        SizedBox(height: height ?? 4.hp),
       ],
     );
   }

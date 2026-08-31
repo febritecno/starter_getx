@@ -1,9 +1,30 @@
 import 'package:get/get.dart';
-import 'package:logistika/routes/app_adapters.dart';
+import 'package:myapp/modules/home/models/news_model.dart';
+import 'package:myapp/repository/dashboard_repository.dart';
 
 class HomeController extends GetxController {
-  final IDashboardRepository repository;
+  final DashboardRepository repository;
   HomeController({required this.repository});
 
-  var isLoading = false.obs;
+  final isLoading = false.obs;
+  final news = <NewsModel>[].obs;
+
+  @override
+  void onInit() {
+    fetchNews();
+    super.onInit();
+  }
+
+  Future<void> fetchNews() async {
+    isLoading(true);
+    try {
+      final res = await repository.getNews(limit: 20);
+      if (res?.statusCode == 200) {
+        final results = (res!.data['results'] as List?) ?? [];
+        news.assignAll(results.map((e) => NewsModel.fromJson(e)).toList());
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
 }

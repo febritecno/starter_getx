@@ -1,225 +1,148 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:logistika/helpers/app_key.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:logistika/helpers/helpers.dart';
-import 'package:logistika/helpers/system/snackbar.dart';
-import 'package:logistika/helpers/utils/connection_utils.dart';
+import 'package:myapp/helpers/app_key.dart';
+import 'package:myapp/helpers/helpers.dart';
+import 'package:myapp/helpers/system/snackbar.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import 'api_errors/api_error_message_error.dart';
-import 'api_errors/bad_network_api_error.dart';
-import 'api_errors/internal_server_api_error.dart';
-import 'api_errors/unauthorized_api_error.dart';
 import 'exceptions/exceptions.dart';
 
+/// Single owner of network concerns: auth header injection, connection
+/// guarding, error mapping and session invalidation. Repositories stay thin
+/// and never deal with Dio errors directly.
 class ApiClient {
   final Dio dio;
 
   ApiClient(this.dio) {
-    dio.options.headers["Authorization"] = AuthPrefs.getToken();
-    dio.options.connectTimeout = const Duration(minutes: 1).inMilliseconds;
-    dio.options.receiveTimeout = const Duration(minutes: 1).inMilliseconds;
+    dio.options
+      ..connectTimeout = const Duration(minutes: 1)
+      ..receiveTimeout = const Duration(minutes: 1);
 
-    dio.interceptors.addAll([
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: false,
-        responseBody: true,
-        error: true,
-        compact: true,
+    // Read the token per request so it stays fresh after login/logout.
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          final token = AuthPrefs.getToken();
+          if (token != null) options.headers['Authorization'] = token;
+          handler.next(options);
+        },
       ),
-    ]);
+    );
+
+    // Body-logging is expensive (serializes every payload) — debug only.
+    if (kDebugMode) {
+      dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseBody: true,
+          error: true,
+          compact: true,
+        ),
+      );
+    }
   }
 
-  /// EVENT
-  Future<Object> _handleResponse(Response response) async {
+  Future<Response?> get(String path, {Map<String, dynamic>? query}) => _send(
+        () => dio.get(
+          path,
+          queryParameters: query,
+          options: Options(
+            followRedirects: false,
+            validateStatus: (status) => status! < 500,
+          ),
+        ),
+      );
+
+  Future<Response?> post(String path, dynamic data, {Options? options}) => _send(
+        () => dio.post(
+          path,
+          data: data,
+          options: options ??
+              Options(contentType: Headers.formUrlEncodedContentType),
+        ),
+      );
+
+  Future<Response?> put(String path, dynamic data,
+          {Map<String, dynamic>? query}) =>
+      _send(() => dio.put(path, data: data, queryParameters: query));
+
+  Future<Response?> delete(String path, {Map<String, dynamic>? query}) =>
+      _send(() => dio.delete(path, queryParameters: query));
+
+  /// One entry point for every verb. No pre-flight connectivity ping — Dio
+  /// already surfaces "no network" as [DioExceptionType.connectionError],
+  /// so we map it here instead of paying a platform-channel round-trip per call.
+  Future<Response?> _send(Future<Response> Function() request) async {
     try {
-      if (response.statusCode == 401 || response.statusCode == 500) {
-        await Helpers.clearToken();
-        try {
-          AppSnackBar.info(response.data['message']);
-        } catch (e) {
-          AppSnackBar.info(response.data['error']);
-        }
+      return await _handleResponse(await request());
+    } on DioException catch (e) {
+      switch (e.type) {
+        case DioExceptionType.badResponse:
+          return _handleResponse(e.response!);
+        case DioExceptionType.connectionError:
+          _notify(_ConnMessage.noInternet);
+          throw BadNetworkException();
+        case DioExceptionType.connectionTimeout:
+        case DioExceptionType.sendTimeout:
+        case DioExceptionType.receiveTimeout:
+          _notify(_ConnMessage.timeout);
+          return null;
+        default:
+          _notify(_ConnMessage.error);
+          return null;
       }
-      return response;
-    } catch (error) {
-      print('$error');
-      return response;
     }
   }
 
-  void _getMessage(String? type) {
+  /// 401/500 means the session is no longer valid: drop the token and surface
+  /// the server message.
+  Future<Response> _handleResponse(Response response) async {
+    if (response.statusCode == 401 || response.statusCode == 500) {
+      await Helpers.clearToken();
+      final data = response.data;
+      final message =
+          (data is Map) ? (data['message'] ?? data['error'])?.toString() : null;
+      if (message != null) AppSnackBar.info(message);
+    }
+    return response;
+  }
+
+  void _notify(_ConnMessage type) {
     switch (type) {
-      case 'no_internet':
+      case _ConnMessage.noInternet:
         AppSnackBar.dynamic(
-            seconds: 4,
-            backgroundColor: Colors.black54,
-            title: 'No Internet Connection',
-            icon: Icon(Icons.wifi_tethering_off, color: Colors.white),
-            message: 'Please check your network connection');
-
+          seconds: 4,
+          backgroundColor: Colors.black54,
+          title: 'No Internet Connection',
+          icon: const Icon(Icons.wifi_tethering_off, color: Colors.white),
+          message: 'Please check your network connection',
+        );
         break;
-      case 'timeout':
+      case _ConnMessage.timeout:
         AppSnackBar.dynamic(
-            seconds: 4,
-            backgroundColor: Colors.black54,
-            title: 'Connection Timeout!',
-            icon: Icon(Icons.alarm_off, color: Colors.white),
-            message: 'Please check your network connection');
+          seconds: 4,
+          backgroundColor: Colors.black54,
+          title: 'Connection Timeout!',
+          icon: const Icon(Icons.alarm_off, color: Colors.white),
+          message: 'Please check your network connection',
+        );
         break;
-      case 'error':
+      case _ConnMessage.error:
         AppSnackBar.dynamic(
-            seconds: 4,
-            backgroundColor: Colors.black54,
-            title: 'Connection Error!',
-            icon: Icon(Icons.running_with_errors_sharp, color: Colors.white),
-            message: 'Request failed');
+          seconds: 4,
+          backgroundColor: Colors.black54,
+          title: 'Connection Error!',
+          icon:
+              const Icon(Icons.running_with_errors_sharp, color: Colors.white),
+          message: 'Request failed',
+        );
         break;
-    }
-  }
-
-  ///
-
-  Future post(String path, dynamic data, {query, options}) async {
-    if (await ConnectionUtils.isNetworkConnected()) {
-      try {
-        final response = await dio.post(path,
-            data: data,
-            options: options ??
-                Options(contentType: Headers.formUrlEncodedContentType));
-        return _handleResponse(response);
-      } on BadNetworkApiError {
-        throw BadNetworkException();
-      } on InternalServerApiError {
-        throw InternalServerException();
-      } on UnauthorizedApiError catch (e) {
-        throw UnauthenticatedException(errorMessage: e.message);
-      } on ApiErrorMessageError catch (e) {
-        throw ApiErrorMessageException(errorMessage: e.errorMessage);
-      } on DioError catch (e) {
-        if (e.type == DioErrorType.response) {
-          return _handleResponse(e.response!);
-        } else if (e.type == DioErrorType.connectTimeout) {
-          _getMessage('timeout');
-        } else if (e.type == DioErrorType.receiveTimeout) {
-          _getMessage('timeout');
-        } else if (e.type == DioErrorType.sendTimeout) {
-          _getMessage('timeout');
-        } else if (e.type == DioErrorType.other) {
-          _getMessage('error');
-        }
-      }
-    } else {
-      _getMessage('no_internet');
-      throw BadNetworkException();
-    }
-  }
-
-  Future put(String path, dynamic data, {query}) async {
-    if (await ConnectionUtils.isNetworkConnected()) {
-      try {
-        final response =
-            await dio.put(path, data: data, queryParameters: query);
-        return _handleResponse(response);
-      } on BadNetworkApiError {
-        throw BadNetworkException();
-      } on InternalServerApiError {
-        throw InternalServerException();
-      } on UnauthorizedApiError catch (e) {
-        throw UnauthenticatedException(errorMessage: e.message);
-      } on ApiErrorMessageError catch (e) {
-        throw ApiErrorMessageException(errorMessage: e.errorMessage);
-      } on DioError catch (e) {
-        if (e.type == DioErrorType.response) {
-          return _handleResponse(e.response!);
-        } else if (e.type == DioErrorType.connectTimeout) {
-          _getMessage('timeout');
-        } else if (e.type == DioErrorType.receiveTimeout) {
-          _getMessage('timeout');
-        } else if (e.type == DioErrorType.sendTimeout) {
-          _getMessage('timeout');
-        } else if (e.type == DioErrorType.other) {
-          _getMessage('error');
-        }
-      }
-    } else {
-      _getMessage('no_internet');
-      throw BadNetworkException();
-    }
-  }
-
-  Future delete(String path, {query}) async {
-    if (await ConnectionUtils.isNetworkConnected()) {
-      try {
-        final response = await dio.delete(path, queryParameters: query);
-        return _handleResponse(response);
-      } on BadNetworkApiError {
-        throw BadNetworkException();
-      } on InternalServerApiError {
-        throw InternalServerException();
-      } on UnauthorizedApiError catch (e) {
-        throw UnauthenticatedException(errorMessage: e.message);
-      } on ApiErrorMessageError catch (e) {
-        throw ApiErrorMessageException(errorMessage: e.errorMessage);
-      } on DioError catch (e) {
-        if (e.type == DioErrorType.response) {
-          return _handleResponse(e.response!);
-        } else if (e.type == DioErrorType.connectTimeout) {
-          _getMessage('timeout');
-        } else if (e.type == DioErrorType.receiveTimeout) {
-          _getMessage('timeout');
-        } else if (e.type == DioErrorType.sendTimeout) {
-          _getMessage('timeout');
-        } else if (e.type == DioErrorType.other) {
-          _getMessage('error');
-        }
-      }
-    } else {
-      _getMessage('no_internet');
-      throw BadNetworkException();
-    }
-  }
-
-  Future get(String path, {query}) async {
-    if (await ConnectionUtils.isNetworkConnected()) {
-      try {
-        final response = await dio.get(path,
-            queryParameters: query,
-            options: Options(
-              followRedirects: false,
-              validateStatus: (status) {
-                return status! < 500;
-              },
-            ));
-        return _handleResponse(response);
-      } on BadNetworkApiError {
-        throw BadNetworkException();
-      } on InternalServerApiError {
-        throw InternalServerException();
-      } on UnauthorizedApiError catch (e) {
-        throw UnauthenticatedException(errorMessage: e.message);
-      } on ApiErrorMessageError catch (e) {
-        throw ApiErrorMessageException(errorMessage: e.errorMessage);
-      } on DioError catch (e) {
-        if (e.type == DioErrorType.response) {
-          return _handleResponse(e.response!);
-        } else if (e.type == DioErrorType.connectTimeout) {
-          _getMessage('timeout');
-        } else if (e.type == DioErrorType.receiveTimeout) {
-          _getMessage('timeout');
-        } else if (e.type == DioErrorType.sendTimeout) {
-          _getMessage('timeout');
-        } else if (e.type == DioErrorType.other) {
-          _getMessage('error');
-        }
-      }
-    } else {
-      _getMessage('no_internet');
-      throw BadNetworkException();
     }
   }
 }
+
+enum _ConnMessage { noInternet, timeout, error }

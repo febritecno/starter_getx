@@ -21,7 +21,7 @@ class TextApp extends StatelessWidget {
   final EdgeInsets? padding;
 
   const TextApp(this.text,
-      {Key? key,
+      {super.key,
       this.textAlign,
       this.style,
       this.maxLines,
@@ -50,13 +50,14 @@ class TextApp extends StatelessWidget {
         overflow: overflow ?? TextOverflow.ellipsis,
         softWrap: softWrap,
         textDirection: textDirection,
-        textScaleFactor: context.isTablet
-            ? textScale['tablet']
-            : context.isPhone
-                ? textScale['phone']
-                : context.isLargeTablet
-                    ? textScale['largeTablet']
-                    : textScale['dafault'],
+        textScaler: TextScaler.linear((context.isTablet
+                ? textScale['tablet']
+                : context.isPhone
+                    ? textScale['phone']
+                    : context.isLargeTablet
+                        ? textScale['largeTablet']
+                        : textScale['dafault']) ??
+            1.0),
         style: style ??
             TextStyle(
               decoration: textDecoration ?? TextDecoration.none,

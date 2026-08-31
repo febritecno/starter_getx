@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:logistika/helpers/third_party/animation_indexed.dart';
-import 'package:logistika/modules/home/controllers/dashboard_controller.dart';
-import 'package:logistika/modules/home/views/home_page.dart';
-import 'package:logistika/shared/theme.dart';
+import 'package:myapp/helpers/third_party/animation_indexed.dart';
+import 'package:myapp/modules/home/controllers/dashboard_controller.dart';
+import 'package:myapp/modules/home/views/home_page.dart';
+import 'package:myapp/shared/theme.dart';
 
 class DashboardPage extends GetView<DashboardController> {
-  const DashboardPage({Key? key}) : super(key: key);
+  const DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {

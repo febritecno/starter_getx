@@ -1,4 +1,4 @@
-part of sizer;
+part of 'sizer.dart';
 
 class SizerUtil {
   /// Device's BoxConstraints
@@ -17,6 +17,21 @@ class SizerUtil {
 
   /// Device's Width
   static late double width;
+
+  /// Design baseline the pixel getters (`.w/.h/.sp/.r`) are authored against.
+  /// Numbers you write == pixels on this reference frame, then scaled to the
+  /// real device. Default: iPhone X logical size. Override in Sizer if needed.
+  static double designWidth = 375;
+  static double designHeight = 812;
+
+  /// Scale factors from design -> device.
+  static double get scaleWidth => width / designWidth;
+  static double get scaleHeight => height / designHeight;
+
+  /// Uniform scale (min of the two) — keeps fonts/radii from distorting or
+  /// overflowing on tall/narrow or short/wide screens.
+  static double get scaleText =>
+      scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
 
   /// Sets the Screen's size and Device's Orientation,
   /// BoxConstraints, Height, and Width

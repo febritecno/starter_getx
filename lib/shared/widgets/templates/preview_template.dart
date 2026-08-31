@@ -1,15 +1,15 @@
-import 'package:logistika/shared/constants.dart';
+import 'package:myapp/shared/constants.dart';
 import 'package:flutter/material.dart';
 
 class PreviewTemplate extends StatelessWidget {
-  const PreviewTemplate({Key? key, this.image}) : super(key: key);
+  const PreviewTemplate({super.key, this.image});
 
   final String? image;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black.withOpacity(0.4),
+      backgroundColor: Colors.black.withValues(alpha: 0.4),
       body: Center(
         child: FadeInImage(
           fit: BoxFit.fitWidth,

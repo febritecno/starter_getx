@@ -1,18 +1,17 @@
-import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/shared/theme.dart';
-import 'package:logistika/shared/widgets/text_app.dart';
+import 'package:myapp/shared/theme.dart';
+import 'package:myapp/helpers/third_party/sizer/sizer.dart';
+import 'package:myapp/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 
 class SubmitButton extends StatelessWidget {
   const SubmitButton(this.title,
-      {Key? key,
+      {super.key,
       required this.onTap,
       this.circularRadius,
       this.color,
       this.height,
       this.fontSize,
-      this.backroundColor})
-      : super(key: key);
+      this.backroundColor});
 
   final String? title;
   final VoidCallback onTap;
@@ -25,19 +24,19 @@ class SubmitButton extends StatelessWidget {
       color: backroundColor ?? Colors.white,
       width: double.infinity,
       child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+          padding: EdgeInsets.symmetric(horizontal: 6.wp, vertical: 2.hp),
           child: ElevatedButton(
             style: ButtonStyle(
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                shape: WidgetStateProperty.all(RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(circularRadius ?? 12))),
-                shadowColor: MaterialStateProperty.all(Colors.transparent),
-                backgroundColor: MaterialStateProperty.all(color ?? kBlueColor),
-                padding: MaterialStateProperty.all(
-                    EdgeInsets.symmetric(vertical: height ?? 4.w))),
+                shadowColor: WidgetStateProperty.all(Colors.transparent),
+                backgroundColor: WidgetStateProperty.all(color ?? kBlueColor),
+                padding: WidgetStateProperty.all(
+                    EdgeInsets.symmetric(vertical: height ?? 4.wp))),
             onPressed: onTap,
             child: TextApp(
               "$title",
-              fontSize: fontSize ?? 16.sp,
+              fontSize: fontSize ?? 16.spp,
               color: Colors.white,
               fontWeight: bold,
             ),

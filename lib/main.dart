@@ -1,20 +1,21 @@
+import 'package:flutter/foundation.dart';
+import 'package:myapp/helpers/third_party/sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:logistika/routes/routes.dart';
-import 'package:logistika/services/app_services.dart';
-import 'package:logistika/shared/constants.dart';
+import 'package:myapp/routes/routes.dart';
+import 'package:myapp/services/app_services.dart';
+import 'package:myapp/shared/constants.dart';
 
-import 'helpers/third_party/sizer/sizer.dart';
 import 'routes/app_pages.dart';
 
 void main() async {
-  initServices();
+  await initServices();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         defaultTransition: Transition.noTransition,
         title: APP_NAME,
         debugShowCheckedModeBanner: false,
-        enableLog: true,
+        enableLog: kDebugMode,
       );
     });
   }

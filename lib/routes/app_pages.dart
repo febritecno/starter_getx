@@ -1,8 +1,8 @@
-import 'package:logistika/helpers/third_party/check_auth.dart';
-import 'package:logistika/modules/auth/views/login_page.dart';
-import 'package:logistika/modules/home/views/dashboard_page.dart';
+import 'package:myapp/helpers/third_party/check_auth.dart';
+import 'package:myapp/modules/auth/views/login_page.dart';
+import 'package:myapp/modules/home/views/dashboard_page.dart';
 import 'package:get/get.dart';
-import 'package:logistika/routes/routes.dart';
+import 'package:myapp/routes/routes.dart';
 
 import 'app_bindings.dart';
 

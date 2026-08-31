@@ -1,29 +1,29 @@
 import 'dart:async';
 
-import 'package:flutter/services.dart';
-import 'package:logistika/helpers/third_party/sizer/sizer.dart';
-import 'package:logistika/shared/constants.dart';
+import 'package:myapp/helpers/third_party/sizer/sizer.dart';
+import 'package:myapp/shared/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:logistika/shared/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CheckAuthScreen extends StatefulWidget {
   final PageRoute loginScreen;
   final PageRoute landingScreen;
 
-  CheckAuthScreen({required this.loginScreen, required this.landingScreen});
+  const CheckAuthScreen({super.key, required this.loginScreen, required this.landingScreen});
 
+  @override
   _CheckAuthScreenState createState() => _CheckAuthScreenState();
 }
 
 class _CheckAuthScreenState extends State<CheckAuthScreen> {
   Future _checkFirstSeen() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
-    String? tokenKey = _prefs.getString('token_key');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? tokenKey = prefs.getString('token_key');
+    if (!mounted) return;
 
     try {
       if (tokenKey.toString() == "null") {
-        _prefs.setString('token_key', 'null');
+        prefs.setString('token_key', 'null');
         Navigator.of(context).pushReplacement(widget.loginScreen);
       } else {
         Navigator.of(context).pushReplacement(widget.landingScreen);
@@ -59,7 +59,7 @@ class _CheckAuthScreenState extends State<CheckAuthScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(ICON_PATH + "splash_logo.png", width: 60.w),
+            Image.asset('${IMAGE_PATH}app_logo.png', width: 60.wp),
           ],
         ),
       ),
