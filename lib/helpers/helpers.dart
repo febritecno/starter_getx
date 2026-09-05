@@ -27,7 +27,7 @@ class Helpers {
     await AuthPrefs.removeKey('user_key');
     await AuthPrefs.clearAll();
     Get.offAllNamed(Routes.LOGIN);
-    Get.to(LoginPage(), binding: AuthBinding());
+    Get.to(const LoginPage(), binding: AuthBinding());
   }
 
   static back({seconds = 0, callback}) async {

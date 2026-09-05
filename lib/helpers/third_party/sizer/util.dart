@@ -76,8 +76,8 @@ class SizerUtil {
     return width < 600
         ? smallSize //'phone'
         : width >= 600 && width <= 1024
-        ? mediumSize //'tablet'
-        : largeSize; //'desktop';
+            ? mediumSize //'tablet'
+            : largeSize; //'desktop';
   }
 }
 

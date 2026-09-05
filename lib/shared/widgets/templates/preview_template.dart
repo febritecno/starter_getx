@@ -14,7 +14,7 @@ class PreviewTemplate extends StatelessWidget {
         child: FadeInImage(
           fit: BoxFit.fitWidth,
           image: NetworkImage(image!),
-          placeholder: AssetImage(NO_IMAGE),
+          placeholder: const AssetImage(NO_IMAGE),
           imageErrorBuilder: (context, error, stackTrace) =>
               Image.asset(DEFAULT_IMAGE),
         ),

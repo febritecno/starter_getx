@@ -1,6 +1,5 @@
 import 'package:myapp/shared/theme.dart';
 import 'package:myapp/helpers/third_party/sizer/sizer.dart';
-import 'package:myapp/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 
 class SwichTab extends StatefulWidget {
@@ -45,16 +44,16 @@ class _SwichTabState extends State<SwichTab> {
                 color: widget.isSelected![index] != true
                     ? Colors.grey
                     : kBlueColor,
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(6),
                 ),
               ),
               child: Align(
                 alignment: Alignment.center,
-                child: TextApp(widget.data[index],
+                child: Text(widget.data[index],
                     textAlign: TextAlign.center,
-                    fontSize: 14.spp,
-                    color: Colors.white),
+                    style:
+                        kBody.copyWith(fontSize: 14.spp, color: Colors.white)),
               ),
             ),
           ),

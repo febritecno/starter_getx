@@ -19,11 +19,11 @@ class AppPages {
           return CheckAuthScreen(
             loginScreen: GetPageRoute(
                 routeName: Routes.LOGIN,
-                page: () => LoginPage(),
+                page: () => const LoginPage(),
                 binding: AuthBinding()),
             landingScreen: GetPageRoute(
               routeName: Routes.DASHBOARD,
-              page: () => DashboardPage(),
+              page: () => const DashboardPage(),
               bindings: [
                 DashboardBinding(),
                 HomeBinding(),
@@ -33,7 +33,7 @@ class AppPages {
         }),
     GetPage(
       name: Routes.DASHBOARD,
-      page: () => DashboardPage(),
+      page: () => const DashboardPage(),
       bindings: [
         DashboardBinding(),
         HomeBinding(),

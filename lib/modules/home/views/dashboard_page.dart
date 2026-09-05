@@ -10,63 +10,59 @@ class DashboardPage extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
+    // Shell scaffold: owns the bottom nav + tab switching. Each tab page
+    // (HomePage) is an AppbarTemplate, so app bar + SafeArea live there.
     return GetBuilder<DashboardController>(
-        init: DashboardController(),
-        builder: (controller) => SafeArea(
-              child: Scaffold(
-                body: Material(
-                  child: AnimatedIndexedStack(
-                      index: controller.tabIndex,
-                      children: [
-                        HomePage(),
-                      ]),
-                ),
-                bottomNavigationBar: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        topLeft: Radius.circular(20)),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black26,
-                          spreadRadius: 0,
-                          blurRadius: 2),
-                    ],
-                  ),
-                  child: Visibility(
-                    visible: false,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0),
-                      ),
-                      child: BottomNavigationBar(
-                        type: BottomNavigationBarType.fixed,
-                        showUnselectedLabels: true,
-                        currentIndex: controller.tabIndex,
-                        selectedItemColor: kBlueColor,
-                        unselectedItemColor: Colors.black87,
-                        selectedFontSize: 12,
-                        selectedLabelStyle: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w600),
-                        unselectedLabelStyle: TextStyle(fontSize: 12),
-                        unselectedFontSize: 12,
-                        onTap: controller.changeTabIndex,
-                        items: [
-                          BottomNavigationBarItem(
-                            icon: Icon(Icons.abc_rounded),
-                            label: 'Home',
-                          ),
-                          BottomNavigationBarItem(
-                            icon: Icon(Icons.abc_rounded),
-                            label: 'Settings',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+      init: DashboardController(),
+      builder: (controller) => Scaffold(
+        body: Material(
+          child:
+              AnimatedIndexedStack(index: controller.tabIndex, children: const [
+            HomePage(),
+          ]),
+        ),
+        bottomNavigationBar: Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+            boxShadow: [
+              BoxShadow(color: Colors.black26, spreadRadius: 0, blurRadius: 2),
+            ],
+          ),
+          child: Visibility(
+            visible: false,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0),
               ),
-            ));
+              child: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                showUnselectedLabels: true,
+                currentIndex: controller.tabIndex,
+                selectedItemColor: kBlueColor,
+                unselectedItemColor: Colors.black87,
+                selectedFontSize: 12,
+                selectedLabelStyle:
+                    const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                unselectedLabelStyle: const TextStyle(fontSize: 12),
+                unselectedFontSize: 12,
+                onTap: controller.changeTabIndex,
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.abc_rounded),
+                    label: 'Home',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.abc_rounded),
+                    label: 'Settings',
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

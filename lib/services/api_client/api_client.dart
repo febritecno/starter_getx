@@ -57,7 +57,8 @@ class ApiClient {
         ),
       );
 
-  Future<Response?> post(String path, dynamic data, {Options? options}) => _send(
+  Future<Response?> post(String path, dynamic data, {Options? options}) =>
+      _send(
         () => dio.post(
           path,
           data: data,

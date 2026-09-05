@@ -9,7 +9,8 @@ class CheckAuthScreen extends StatefulWidget {
   final PageRoute loginScreen;
   final PageRoute landingScreen;
 
-  const CheckAuthScreen({super.key, required this.loginScreen, required this.landingScreen});
+  const CheckAuthScreen(
+      {super.key, required this.loginScreen, required this.landingScreen});
 
   @override
   _CheckAuthScreenState createState() => _CheckAuthScreenState();
@@ -17,8 +18,8 @@ class CheckAuthScreen extends StatefulWidget {
 
 class _CheckAuthScreenState extends State<CheckAuthScreen> {
   Future _checkFirstSeen() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? tokenKey = prefs.getString('token_key');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? tokenKey = prefs.getString('token_key');
     if (!mounted) return;
 
     try {
@@ -36,7 +37,7 @@ class _CheckAuthScreenState extends State<CheckAuthScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 2), () {
       _checkFirstSeen();
     });
   }
@@ -45,7 +46,7 @@ class _CheckAuthScreenState extends State<CheckAuthScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

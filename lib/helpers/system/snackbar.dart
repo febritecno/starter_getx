@@ -19,7 +19,7 @@ class AppSnackBar {
       forwardAnimationCurve: Curves.fastOutSlowIn,
       snackPosition: snackPosition,
       shouldIconPulse: true,
-      margin: EdgeInsets.only(bottom: 5, left: 20, right: 20),
+      margin: const EdgeInsets.only(bottom: 5, left: 20, right: 20),
       isDismissible: true,
       duration: Duration(seconds: seconds),
     );
@@ -29,13 +29,13 @@ class AppSnackBar {
     Get.snackbar(
       "Success",
       message,
-      icon: Icon(Icons.check_circle_outline_rounded, color: Colors.white),
+      icon: const Icon(Icons.check_circle_outline_rounded, color: Colors.white),
       colorText: Colors.white,
       backgroundColor: Colors.green[900],
       forwardAnimationCurve: Curves.fastOutSlowIn,
       snackPosition: SnackPosition.TOP,
       shouldIconPulse: true,
-      margin: EdgeInsets.only(bottom: 5, left: 20, right: 20),
+      margin: const EdgeInsets.only(bottom: 5, left: 20, right: 20),
       isDismissible: true,
       duration: Duration(seconds: seconds ?? 3),
     );
@@ -52,7 +52,7 @@ class AppSnackBar {
       snackPosition: SnackPosition.BOTTOM,
       shouldIconPulse: true,
       isDismissible: true,
-      duration: Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
     );
   }
 
@@ -60,15 +60,15 @@ class AppSnackBar {
     Get.snackbar(
       title ?? "Error",
       message,
-      icon: Icon(Icons.error, color: Colors.white),
+      icon: const Icon(Icons.error, color: Colors.white),
       colorText: Colors.white,
       backgroundColor: Colors.red[900],
       forwardAnimationCurve: Curves.fastOutSlowIn,
       snackPosition: SnackPosition.TOP,
       shouldIconPulse: true,
-      margin: EdgeInsets.only(bottom: 5, left: 20, right: 20),
+      margin: const EdgeInsets.only(bottom: 5, left: 20, right: 20),
       isDismissible: true,
-      duration: Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:myapp/shared/widgets/text_app.dart';
+import 'package:myapp/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class RoundedButton extends StatelessWidget {
@@ -23,10 +23,9 @@ class RoundedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
                 color: Colors.black26, offset: Offset(0, 4), blurRadius: 5.0)
           ],
@@ -47,11 +46,12 @@ class RoundedButton extends StatelessWidget {
             ),
           ),
         ),
-        child: TextApp(title!,
-            color: fontColor,
-            fontSize: fontSize,
-            fontWeight: fontWeight ?? FontWeight.normal),
+        child: Text(title!,
+            style: kButton.copyWith(
+                color: fontColor,
+                fontSize: fontSize,
+                fontWeight: fontWeight ?? FontWeight.normal)),
       ),
-    ));
+    );
   }
 }

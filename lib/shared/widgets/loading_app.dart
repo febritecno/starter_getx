@@ -10,7 +10,8 @@ class LoadingApp extends StatefulWidget {
   final Widget? progressIndicator;
   final Widget child;
 
-  const LoadingApp({super.key, 
+  const LoadingApp({
+    super.key,
     required this.isLoading,
     required this.child,
     this.opacity = 0.5,
@@ -34,8 +35,8 @@ class _LoadingAppState extends State<LoadingApp>
   void initState() {
     super.initState();
     _overlayVisible = false;
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    _controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 300));
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
     _animation.addStatusListener((status) {
       if (status == AnimationStatus.forward) {
@@ -69,8 +70,8 @@ class _LoadingAppState extends State<LoadingApp>
 
   @override
   Widget build(BuildContext context) {
-    var sizeContainer = ((MediaQuery.of(context).size.width) * 30) / 100;
-    var widgets = <Widget>[];
+    final sizeContainer = ((MediaQuery.of(context).size.width) * 30) / 100;
+    final widgets = <Widget>[];
     widgets.add(widget.child);
     if (_overlayVisible == true) {
       final modal = FadeTransition(
@@ -120,7 +121,8 @@ class CircleLoading extends StatelessWidget {
   final Widget? progressIndicator;
 
   const CircleLoading(
-      {super.key, this.sizeHeight = 60,
+      {super.key,
+      this.sizeHeight = 60,
       this.mainAxisAlignment = MainAxisAlignment.center,
       this.crossAxisAlignment = CrossAxisAlignment.center,
       this.progressIndicator,

@@ -1,7 +1,6 @@
 import 'package:myapp/shared/theme.dart';
 import 'package:myapp/helpers/third_party/sizer/sizer.dart';
 import 'package:myapp/shared/widgets/components/img_network.dart';
-import 'package:myapp/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,6 +45,8 @@ class AppDialog {
   }
 }
 
+
+// Components
 class PreviewItem extends StatelessWidget {
   final String? image;
 
@@ -62,7 +63,7 @@ class PreviewItem extends StatelessWidget {
         color: Colors.black.withValues(alpha: 0.8),
         child: InteractiveViewer(
           panEnabled: false,
-          boundaryMargin: EdgeInsets.all(100),
+          boundaryMargin: const EdgeInsets.all(100),
           minScale: 0.5,
           maxScale: 2,
           child: AlertDialog(
@@ -102,11 +103,11 @@ class AlertItem extends StatelessWidget {
     return AlertDialog(
       content: ConstrainedBox(
         constraints: BoxConstraints(
-          //* atur maxHeight buat batasin ukuran dialog 100.hp = 100% full screen di layar
+          //* cap dialog height (100.hp = full screen); 80.hp = 80% of screen
           maxHeight: 80.hp,
         ),
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.rectangle,
             color: Color(0x00ffffff),
             borderRadius: BorderRadius.all(Radius.circular(32)),
@@ -119,25 +120,25 @@ class AlertItem extends StatelessWidget {
               body == null
                   ? Column(
                       children: [
-                        TextApp(
+                        Text(
                           title!,
-                          color: kBlueColor,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 16.spp,
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.clip,
                           maxLines: 2,
+                          style: kTitle.copyWith(
+                              color: kBlueColor,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 16.spp),
                         ),
                         SizedBox(height: 2.hp),
-                        TextApp(
+                        Text(
                           desc!,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14.spp,
                           textAlign: TextAlign.center,
-                          // *atur maxLines buat batasin max baris yang ditampilkan
+                          // cap the number of lines shown
                           maxLines: 18,
                           softWrap: true,
                           overflow: TextOverflow.clip,
+                          style: kBody.copyWith(fontSize: 14.spp),
                         ),
                       ],
                     )
@@ -157,7 +158,7 @@ class AlertItem extends StatelessWidget {
                                   },
                                 ),
                                 padding: WidgetStateProperty.all(
-                                    EdgeInsets.symmetric(
+                                    const EdgeInsets.symmetric(
                                         vertical: 0, horizontal: 0)),
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                 minimumSize:
@@ -173,14 +174,15 @@ class AlertItem extends StatelessWidget {
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 1.wp, vertical: 1.5.hp),
-                                child: TextApp(
+                                child: Text(
                                   btnLeft!,
-                                  fontSize: 12.spp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
+                                  style: kButton.copyWith(
+                                      fontSize: 12.spp,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700),
                                 ),
                               )),
-                          // *atur jarak kedua tombol agar engga gancet ketika text cuma sebiji
+                          // gap between the two buttons so they don't touch on short labels
                           SizedBox(width: 3.wp),
                           ElevatedButton(
                             style: ButtonStyle(
@@ -191,7 +193,7 @@ class AlertItem extends StatelessWidget {
                                 },
                               ),
                               padding: WidgetStateProperty.all(
-                                  EdgeInsets.symmetric(
+                                  const EdgeInsets.symmetric(
                                       vertical: 0, horizontal: 0)),
                               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                               minimumSize:
@@ -206,11 +208,12 @@ class AlertItem extends StatelessWidget {
                             child: Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 1.wp, vertical: 1.5.hp),
-                              child: TextApp(
+                              child: Text(
                                 btnRight!,
-                                fontSize: 12.spp,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700,
+                                style: kButton.copyWith(
+                                    fontSize: 12.spp,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700),
                               ),
                             ),
                           ),

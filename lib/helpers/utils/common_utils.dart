@@ -1,3 +1,3 @@
 class Utils {
-  // TODO: add shared helpers here (formatters, pickers, etc).
+  // TODO: add shared utils here (pickers, advanced utils, etc).
 }

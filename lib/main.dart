@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:myapp/routes/routes.dart';
 import 'package:myapp/services/app_services.dart';
 import 'package:myapp/shared/constants.dart';
+import 'package:myapp/shared/theme.dart';
 
 import 'routes/app_pages.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         initialRoute: Routes.INITIAL,
         getPages: AppPages.list,
         defaultTransition: Transition.noTransition,
+        theme: appTheme,
         title: APP_NAME,
         debugShowCheckedModeBanner: false,
         enableLog: kDebugMode,

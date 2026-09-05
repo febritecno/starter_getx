@@ -13,7 +13,7 @@ class PdfViewTemplate extends StatefulWidget {
   const PdfViewTemplate(
       {super.key,
       this.title = "Reader",
-      this.url = "http://www.africau.edu/images/default/sample.pdf"});
+      this.url = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"});
 
   @override
   State<PdfViewTemplate> createState() => _PdfViewTemplateState();
@@ -37,19 +37,19 @@ class _PdfViewTemplateState extends State<PdfViewTemplate> {
   }
 
   Future<File> createFileOfPdfUrl() async {
-    Completer<File> completer = Completer();
+    final Completer<File> completer = Completer();
     debugPrint("Start download file from internet!");
     try {
       final url = widget.url!;
       final filename = url.substring(url.lastIndexOf("/") + 1);
-      var request = await HttpClient().getUrl(Uri.parse(url));
-      var response = await request.close();
-      var bytes = await consolidateHttpClientResponseBytes(response);
-      var dir = await getApplicationDocumentsDirectory();
+      final request = await HttpClient().getUrl(Uri.parse(url));
+      final response = await request.close();
+      final bytes = await consolidateHttpClientResponseBytes(response);
+      final dir = await getApplicationDocumentsDirectory();
       debugPrint("Download files");
       debugPrint("${dir.path}/$filename");
       final path = "${dir.path}/$filename";
-      File file = File(path);
+      final File file = File(path);
       await file.writeAsBytes(bytes, flush: true);
       completer.complete(file);
     } catch (e) {
@@ -99,7 +99,7 @@ class _PdfViewTemplateState extends State<PdfViewTemplate> {
                 )
               : errorMessage.isEmpty
                   ? !isReady
-                      ? Center(
+                      ? const Center(
                           child: CircularProgressIndicator(),
                         )
                       : Container()
@@ -109,8 +109,9 @@ class _PdfViewTemplateState extends State<PdfViewTemplate> {
                           child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.file_download_off_outlined, size: 80),
-                          SizedBox(height: 20),
+                          const Icon(Icons.file_download_off_outlined,
+                              size: 80),
+                          const SizedBox(height: 20),
                           Text(errorMessage),
                         ],
                       )))

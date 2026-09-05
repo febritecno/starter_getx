@@ -11,4 +11,3 @@ const IMAGE_PATH = 'assets/images/';
 const ICON_PATH = 'assets/icons/';
 const DEFAULT_IMAGE = '${ICON_PATH}app_icon.png';
 const NO_IMAGE = '${ICON_PATH}app_icon.png';
-const List<String> ERROR_MESSAGE = ['Error', 'Something went wrong'];

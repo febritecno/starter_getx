@@ -1,6 +1,5 @@
 import 'package:myapp/shared/theme.dart';
 import 'package:myapp/helpers/third_party/sizer/sizer.dart';
-import 'package:myapp/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 
 class SubmitButton extends StatelessWidget {
@@ -34,11 +33,12 @@ class SubmitButton extends StatelessWidget {
                 padding: WidgetStateProperty.all(
                     EdgeInsets.symmetric(vertical: height ?? 4.wp))),
             onPressed: onTap,
-            child: TextApp(
+            child: Text(
               "$title",
-              fontSize: fontSize ?? 16.spp,
-              color: Colors.white,
-              fontWeight: bold,
+              style: kButton.copyWith(
+                  fontSize: fontSize ?? 16.spp,
+                  color: Colors.white,
+                  fontWeight: bold),
             ),
           )),
     );

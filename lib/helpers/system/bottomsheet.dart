@@ -1,6 +1,5 @@
 import 'package:myapp/shared/theme.dart';
 import 'package:myapp/helpers/third_party/sizer/sizer.dart';
-import 'package:myapp/shared/widgets/text_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +7,7 @@ class AppBottomSheet {
   static void custom(children, {isFull = false}) {
     Get.bottomSheet(
         ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(16),
             topRight: Radius.circular(16),
           ),
@@ -51,14 +50,14 @@ class AppBottomSheet {
                         onTap: () => Get.back(),
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4.wp),
-                          child: Icon(Icons.close, color: Colors.grey),
+                          child: const Icon(Icons.close, color: Colors.grey),
                         ),
                       ),
                       Center(
-                        child: TextApp(
+                        child: Text(
                           title,
-                          fontSize: 20.spp,
-                          fontWeight: FontWeight.w700,
+                          style: kTitle.copyWith(
+                              fontSize: 20.spp, fontWeight: FontWeight.w700),
                         ),
                       )
                     ],
@@ -98,14 +97,14 @@ class AppBottomSheet {
                       onTap: () => Get.back(),
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 4.wp),
-                        child: Icon(Icons.close, color: Colors.grey),
+                        child: const Icon(Icons.close, color: Colors.grey),
                       ),
                     ),
                     Center(
-                      child: TextApp(
+                      child: Text(
                         title,
-                        fontSize: 20.spp,
-                        fontWeight: FontWeight.w700,
+                        style: kTitle.copyWith(
+                            fontSize: 20.spp, fontWeight: FontWeight.w700),
                       ),
                     )
                   ],
@@ -135,7 +134,9 @@ class ListBottomSheet extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: TextApp(title, fontSize: 16.spp, fontWeight: FontWeight.w600),
+          title: Text(title,
+              style: kTitle.copyWith(
+                  fontSize: 16.spp, fontWeight: FontWeight.w600)),
           onTap: () async {
             await onTap();
             Get.back();

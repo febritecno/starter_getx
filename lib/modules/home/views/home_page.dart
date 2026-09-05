@@ -4,7 +4,7 @@ import 'package:myapp/helpers/helpers.dart';
 import 'package:myapp/helpers/third_party/sizer/sizer.dart';
 import 'package:myapp/modules/home/models/news_model.dart';
 import 'package:myapp/shared/theme.dart';
-import 'package:myapp/shared/widgets/text_app.dart';
+import 'package:myapp/shared/widgets/templates/appbar_template.dart';
 import '../controllers/home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -12,26 +12,28 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    // AppbarTemplate is the single screen foundation: status bar + SafeArea +
+    // app bar all handled here. Root tab → no back button.
+    return AppbarTemplate(
+      title: 'News',
+      showBack: false,
+      isCenter: false,
+      isCustom: true,
       backgroundColor: kGreyColor,
-      appBar: AppBar(
-        backgroundColor: kDarkBlueColor,
-        automaticallyImplyLeading: false,
-        title: TextApp('News',
-            color: Colors.white, fontWeight: bold, fontSize: 18.sp),
-        actions: [
-          IconButton(
-            onPressed: () => Helpers.clearToken(),
-            icon: Icon(Icons.logout, color: Colors.white),
-          ),
-        ],
-      ),
+      actions: [
+        IconButton(
+          onPressed: () => Helpers.clearToken(),
+          icon: const Icon(Icons.logout, color: kDarkBlueColor),
+        ),
+      ],
       body: Obx(() {
         if (controller.isLoading.value && controller.news.isEmpty) {
           return const Center(child: CircularProgressIndicator());
         }
         if (controller.news.isEmpty) {
-          return Center(child: TextApp('No news', color: kDarkGreyColor));
+          return Center(
+              child: Text('No news',
+                  style: kBody.copyWith(color: kDarkGreyColor)));
         }
         return RefreshIndicator(
           onRefresh: controller.fetchNews,
@@ -72,11 +74,16 @@ class HomePage extends GetView<HomeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextApp(n.title ?? '',
-                    fontWeight: bold, fontSize: 15.sp, maxLines: 3),
+                Text(n.title ?? '',
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: kTitle.copyWith(fontSize: 15.sp)),
                 SizedBox(height: 6.h),
-                TextApp(n.newsSite ?? '',
-                    color: kBlueColor, fontSize: 11.sp, fontWeight: semiBold),
+                Text(n.newsSite ?? '',
+                    style: kBodySm.copyWith(
+                        color: kBlueColor,
+                        fontSize: 11.sp,
+                        fontWeight: semiBold)),
               ],
             ),
           ),

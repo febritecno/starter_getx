@@ -8,7 +8,8 @@ class CircleLoading extends StatelessWidget {
   final CrossAxisAlignment crossAxisAlignment;
 
   const CircleLoading(
-      {super.key, this.sizeHeight = 60,
+      {super.key,
+      this.sizeHeight = 60,
       this.mainAxisAlignment = MainAxisAlignment.center,
       this.crossAxisAlignment = CrossAxisAlignment.center,
       this.color,

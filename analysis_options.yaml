@@ -32,6 +32,14 @@ linter:
   # producing the lint.
   rules:
     constant_identifier_names: false
-    prefer_const_constructors: false
+    # Perf/hygiene lints (surfaced by `flutter analyze` + `dart fix`). See tool/PERFORMANCE.md.
+    prefer_const_constructors: true
+    prefer_const_constructors_in_immutables: true
+    prefer_const_literals_to_create_immutables: true
+    prefer_const_declarations: true
+    avoid_unnecessary_containers: true
+    sized_box_for_whitespace: true
+    unnecessary_const: true
+    prefer_final_locals: true
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
